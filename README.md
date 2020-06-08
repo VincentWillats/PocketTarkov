@@ -1,5 +1,8 @@
 # PocketTarkov 
+Last Updated on 08/06/2020
+
  Overlay For Escape For Tarkov to provide easy access to game information.
+ 
  ![image](https://github.com/VincentWillats/PocketTarkov/blob/master/example.JPG?raw=true)
  
 

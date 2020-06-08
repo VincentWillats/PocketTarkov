@@ -22,7 +22,7 @@ Current Verison 0.51 - [Link](https://github.com/VincentWillats/PocketTarkov/rel
 3. Open and close the Overlay with Left Shift & V, or double click taskbar notification icon.
 4. Hotkey can be changed in Settings.
 5. (Optional) Create your own copy of the quest item tracker google sheet from [Here](https://docs.google.com/spreadsheets/d/1FZMjvxB0RM89Nf7o7nNIWYf78ahp8-0q4nV6CrP-Kw8/edit?usp=sharing)
-6. Add your google sheet URL to the settings.
+6. (Optional) Add your google sheet URL to the settings.
 
 ## Future Plans
 - Add scroll zoom on maps.

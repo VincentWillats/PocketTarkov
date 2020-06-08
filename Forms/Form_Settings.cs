@@ -58,8 +58,7 @@ namespace PocketTarkov
         }         
 
         private void btn_Save_Click(object sender, EventArgs e)
-        {
-            Save();
+        {            
             this.Close();
         }
 
@@ -112,7 +111,7 @@ namespace PocketTarkov
             kbh.OnKeyPressed -= kbh_OnKeyPressed;
             kbh.OnKeyUnpressed -= kbh_OnKeyUnpressed;
             kbh.UnHookKeyboard();
-            kbh = null;
+            //kbh = null;
         }
 
         private void Form_Settings_FormClosing(object sender, FormClosingEventArgs e)

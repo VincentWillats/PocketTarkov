@@ -2,19 +2,19 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="Form_Nav.cs">
+    <Compile Update="Forms\Form_Nav.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Form_RootOverlay.cs">
+    <Compile Update="Forms\Form_RootOverlay.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Form_Settings.cs">
+    <Compile Update="Forms\Form_Settings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Form_ShowMap.cs">
+    <Compile Update="Forms\Form_ShowMap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Form_ShowWebpage.cs">
+    <Compile Update="Forms\Form_ShowWebpage.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

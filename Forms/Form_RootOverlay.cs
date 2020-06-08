@@ -131,7 +131,7 @@ namespace PocketTarkov
 
             notifyIcon = new NotifyIcon();
 
-            notifyIcon.Icon = new Icon("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/notifyIcon32.ico");
+            notifyIcon.Icon = Properties.Resources.notifyIcon32;
 
             notifyIcon.Text = "Pocket EFT Overlay";
             notifyIcon.Visible = true;
@@ -219,7 +219,8 @@ namespace PocketTarkov
         private void AddSettingsButton()
         {
             PictureBox settingsImg = new PictureBox();
-            settingsImg.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/settings.PNG");
+            settingsImg.Image = Properties.Resources.settings;
+            settingsImg.Refresh();
             settingsImg.SizeMode = PictureBoxSizeMode.AutoSize;
             settingsImg.Top = taskNavPanel.Bottom + 50;
             settingsImg.Left = mapNavPanel.Left;
@@ -233,13 +234,15 @@ namespace PocketTarkov
         private void AddTaskPanelButtons()
         {
             PictureBox titleTasks = new PictureBox();
-            titleTasks.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/tasks.png");
+            titleTasks.Image = Properties.Resources.tasks;
+            titleTasks.Refresh();
             titleTasks.SizeMode = PictureBoxSizeMode.AutoSize;
             titleTasks.Padding = new Padding(0, 0, 0, 25);
             titleTasks.BackColor = Color.Transparent;  
 
             PictureBox wiki = new PictureBox();
-            wiki.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/wiki.png");
+            wiki.Image = Properties.Resources.wiki;
+            wiki.Refresh();
             wiki.SizeMode = PictureBoxSizeMode.AutoSize;
             wiki.Top = titleTasks.Bottom + 25;
             wiki.Name = "wikiTasks";
@@ -247,7 +250,8 @@ namespace PocketTarkov
             wiki.BackColor = Color.Transparent;
 
             PictureBox taskItemTracker = new PictureBox();
-            taskItemTracker.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/taskTracker.png");
+            taskItemTracker.Image = Properties.Resources.taskTracker;
+            taskNavPanel.Refresh();
             taskItemTracker.SizeMode = PictureBoxSizeMode.AutoSize;
             taskItemTracker.Top = wiki.Bottom;
             taskItemTracker.Name = "taskItemTracker";
@@ -262,13 +266,15 @@ namespace PocketTarkov
         private void AddBallisticsPanelButtons()
         {
             PictureBox titleAmmo = new PictureBox();
-            titleAmmo.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/ammoTitle.png");
+            titleAmmo.Image = Properties.Resources.ammoTitle;
+            titleAmmo.Refresh();
             titleAmmo.SizeMode = PictureBoxSizeMode.AutoSize;
             titleAmmo.Padding = new Padding(0, 0, 0, 25);
             titleAmmo.BackColor = Color.Transparent;
 
             PictureBox eftMonster = new PictureBox();
-            eftMonster.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/eftMonster.png");
+            eftMonster.Image = Properties.Resources.eftMonster;
+            eftMonster.Refresh();
             eftMonster.SizeMode = PictureBoxSizeMode.AutoSize;
             eftMonster.Top = titleAmmo.Bottom + 25;
             eftMonster.Name = "eftMonster";
@@ -276,7 +282,8 @@ namespace PocketTarkov
             eftMonster.BackColor = Color.Transparent;
 
             PictureBox noFoodsG = new PictureBox();
-            noFoodsG.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/nofoodsGDoc.png");
+            noFoodsG.Image = Properties.Resources.nofoodsGDoc;
+            noFoodsG.Refresh();
             noFoodsG.SizeMode = PictureBoxSizeMode.AutoSize;
             noFoodsG.Top = eftMonster.Bottom;
             noFoodsG.Name = "noFoodGoogleDoc";
@@ -284,7 +291,8 @@ namespace PocketTarkov
             noFoodsG.BackColor = Color.Transparent;
 
             PictureBox wiki = new PictureBox();
-            wiki.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/wiki.png");
+            wiki.Image = Properties.Resources.wiki;
+            wiki.Refresh();
             wiki.SizeMode = PictureBoxSizeMode.AutoSize;
             wiki.Top = noFoodsG.Bottom;
             wiki.Name = "wikiAmmo";
@@ -300,13 +308,15 @@ namespace PocketTarkov
         private void AddMapPanelButtons()
         {
             PictureBox titleMaps = new PictureBox();
-            titleMaps.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/mapsTitle.PNG");
+            titleMaps.Image = Properties.Resources.mapsTitle;
+            titleMaps.Refresh();
             titleMaps.SizeMode = PictureBoxSizeMode.AutoSize;
             titleMaps.Padding = new Padding(0, 0, 0, 25);
             titleMaps.BackColor = Color.Transparent;
 
             PictureBox factoryMap = new PictureBox();
-            factoryMap.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/mapNameFactory.PNG");
+            factoryMap.Image = Properties.Resources.mapNameFactory;
+            factoryMap.Refresh();
             factoryMap.SizeMode = PictureBoxSizeMode.AutoSize;
             factoryMap.Top = titleMaps.Bottom + 25;
             factoryMap.Left = titleMaps.Left;
@@ -315,7 +325,8 @@ namespace PocketTarkov
             factoryMap.BackColor = Color.Transparent;
 
             PictureBox interchangeMap = new PictureBox();
-            interchangeMap.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/mapNameInterchange.PNG");
+            interchangeMap.Image = Properties.Resources.mapNameInterchange;
+            interchangeMap.Refresh();
             interchangeMap.SizeMode = PictureBoxSizeMode.AutoSize;
             interchangeMap.Top = factoryMap.Bottom;
             interchangeMap.Left = titleMaps.Left;
@@ -324,7 +335,8 @@ namespace PocketTarkov
             interchangeMap.BackColor = Color.Transparent;
 
             PictureBox reserveMap = new PictureBox();
-            reserveMap.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/mapNameReserve.PNG");
+            reserveMap.Image = Properties.Resources.mapNameReserve;
+            reserveMap.Refresh();
             reserveMap.SizeMode = PictureBoxSizeMode.AutoSize;
             reserveMap.Top = interchangeMap.Bottom;
             reserveMap.Left = titleMaps.Left;
@@ -333,7 +345,8 @@ namespace PocketTarkov
             reserveMap.BackColor = Color.Transparent;
 
             PictureBox woodsMap = new PictureBox();
-            woodsMap.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/mapNameWoods.PNG");
+            woodsMap.Image = Properties.Resources.mapNameWoods;
+            woodsMap.Refresh();
             woodsMap.SizeMode = PictureBoxSizeMode.AutoSize;
             woodsMap.Top = reserveMap.Bottom;
             woodsMap.Left = titleMaps.Left;
@@ -342,7 +355,8 @@ namespace PocketTarkov
             woodsMap.BackColor = Color.Transparent;
 
             PictureBox shorelineMap = new PictureBox();
-            shorelineMap.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/mapNameShoreline.PNG");
+            shorelineMap.Image = Properties.Resources.mapNameShoreline;
+            shorelineMap.Refresh();
             shorelineMap.SizeMode = PictureBoxSizeMode.AutoSize;
             shorelineMap.Top = woodsMap.Bottom;
             shorelineMap.Left = titleMaps.Left;
@@ -351,7 +365,8 @@ namespace PocketTarkov
             shorelineMap.BackColor = Color.Transparent;
 
             PictureBox customsMap = new PictureBox();
-            customsMap.Image = Image.FromFile("G:/Programming/Projects/TarkovOverlay/PocketTarkov/images/mapNameCustoms.PNG");
+            customsMap.Image = Properties.Resources.mapNameCustoms;
+            customsMap.Refresh();
             customsMap.SizeMode = PictureBoxSizeMode.AutoSize;
             customsMap.Top = shorelineMap.Bottom;
             customsMap.Left = titleMaps.Left;

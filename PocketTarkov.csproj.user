@@ -1,20 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>G:\Programming\Projects\TarkovOverlay\PocketTarkov\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Update="Forms\Form_Nav.cs">
+    <Compile Update="Form_Nav.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\Form_RootOverlay.cs">
+    <Compile Update="Form_RootOverlay.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\Form_Settings.cs">
+    <Compile Update="Form_Settings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\Form_ShowMap.cs">
+    <Compile Update="Form_ShowMap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\Form_ShowWebpage.cs">
+    <Compile Update="Form_ShowWebpage.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

@@ -19,7 +19,7 @@ Current Verison 0.51 - [Link](https://github.com/VincentWillats/PocketTarkov/rel
 ## How To Use
 1. Open Escape From Tarkov in Borderless or Windowed.
 2. Run PocketTarkov.exe.
-3. Open and close the Overlay with Left Shift & C, or double click taskbar notification icon.
+3. Open and close the Overlay with Left Shift & V, or double click taskbar notification icon.
 4. Hotkey can be changed in Settings.
 
 ## Future Plans

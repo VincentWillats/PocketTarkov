@@ -542,9 +542,6 @@ namespace PocketTarkov
             var folder = Application.UserAppDataPath;
             string fileName = "/settings.txt";
             var path = folder + fileName;
-
-            settings.hotkey03 = Keys.LShiftKey;
-            settings.hotkey04 = Keys.M;
             using (FileStream stream = new FileStream(path, FileMode.OpenOrCreate))
             {
                 formatter.Serialize(stream, settings);

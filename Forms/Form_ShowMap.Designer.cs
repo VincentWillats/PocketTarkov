@@ -33,6 +33,7 @@
             // Form_ShowMap
             // 
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form_ShowMap";
             this.Load += new System.EventHandler(this.Form_ShowMap_Load);
             this.ResumeLayout(false);

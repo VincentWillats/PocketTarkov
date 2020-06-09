@@ -15,6 +15,7 @@ using System.Windows.Forms.Design;
 using Windows.Data.Xml.Dom;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using PocketTarkov.Classes;
 
 namespace PocketTarkov
 {
@@ -416,12 +417,23 @@ namespace PocketTarkov
         }
 
         private void OpenOrCloseOverlay()
-        {            
+        {
             //this.Visible = !this.Visible;
-            foreach (Form c in Application.OpenForms)
-            { 
-                c.Visible = !c.Visible;
-            }            
+            foreach (Form f in Application.OpenForms)
+            {
+                if(f is MyForm)
+                {
+                    MyForm myf = f as MyForm;
+                    if (!myf.KeepOpenBool)
+                    {
+                        myf.Visible = !myf.Visible;
+                    }                    
+                }
+                else
+                {
+                    f.Visible = !f.Visible;
+                }                
+            }         
         }
 
 

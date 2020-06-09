@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PocketTarkov.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,11 +9,25 @@ using System.Windows.Forms;
 
 namespace PocketTarkov
 {
-    public partial class Form_ShowMap : Form
+    public partial class Form_ShowMap : MyForm
     {
+        
         PictureBox map = new PictureBox();
+        
+
+        //TrackBar opacityBar = new TrackBar();
+        //Label opacityBarLabel = new Label();
+        
+        //CheckBox keepOpenCheckBox = new CheckBox(); 
+        //Label keepOpenCheckBoxLabel = new Label();
+
+        //ToolStripControlHost opacityBarControlHost;
+        //ToolStripControlHost opacityBarLabelControlHost;
+        //ToolStripControlHost keepOpenCheckBoxControlHost;
+        //ToolStripControlHost keepOpenCheckBoxLabelControlHost;
+
         string mapToShow;
-        Form_RootOverlay rootOverlay;
+        //Form_RootOverlay rootOverlay;
         private Point startingPoint = Point.Empty;
         private Point movingPoint = Point.Empty;
         public Form_ShowMap(Form_RootOverlay _rootOverlay, string mapName)
@@ -24,32 +39,23 @@ namespace PocketTarkov
 
         private void Form_ShowMap_Load(object sender, EventArgs e)
         {
-            LoadProperties();
+            LoadFormProperties();
+            LoadMapObject();
+            AddMenuBar();
+
             LoadMap();
         }
 
-        private void LoadProperties()
-        {
-            //this.ShowInTaskbar = false;
-            this.TopMost = true;            
-            this.BackColor = Color.Wheat;
-            //this.TransparencyKey = Color.Wheat;
-            this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
-            this.StartPosition = FormStartPosition.Manual;
-            this.Size = new Size(rootOverlay.Width / 2, rootOverlay.Height / 2);
-            //this.Location = rootOverlay.Location;
-            this.Location = new Point(
-                rootOverlay.ClientSize.Width / 2 - this.Size.Width / 2 + rootOverlay.Left,
-                rootOverlay.ClientSize.Height / 2 - this.Size.Height / 2);
-
-
-           
+        private void LoadMapObject()
+        {     
+            // Set Map Properties
+            map.Top = ms.Bottom;
             map.MouseDoubleClick += new MouseEventHandler(Map_DoubleClick);            
             map.SizeMode = PictureBoxSizeMode.StretchImage;
-            map.Dock = DockStyle.Fill;
+            map.Dock = DockStyle.Fill;            
+            // Add Controls to Form
             this.Controls.Add(map);            
         }
- 
 
         private void LoadMap()
         {
@@ -153,6 +159,6 @@ namespace PocketTarkov
             map.MouseMove -= Map_MouseMove;
             map.Paint -= Map_Paint;
         }
-        
+
     }
 }

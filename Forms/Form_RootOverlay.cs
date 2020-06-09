@@ -24,8 +24,11 @@ namespace PocketTarkov
         public const string TARKOV_WINDOW_NAME = "EscapeFromTarkov";
         public SettingsData settings = new SettingsData();
 
-        bool firstHotkeyPressed;
-        bool secondHotkeyPressed;
+        bool openCloseFirstHotkeyPressed;
+        bool openCloseSecondHotkeyPressed;
+        bool clickableFirstHotkeyPressed;
+        bool clickableSecondHotkeyPressed;
+
 
         private NotifyIcon notifyIcon;
         private ContextMenuStrip contextMenuStrip;
@@ -93,18 +96,15 @@ namespace PocketTarkov
             this.TopMost = true;
             this.FormBorderStyle = FormBorderStyle.None;
 
-
             // Sets Form Click Through
             int initialStyle = GetWindowLong(this.Handle, -20);
-            SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
+            SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20); 
 
             // Sets form position over game
             GetWindowRect(handle, out rect);
             this.Size = new Size(rect.right - rect.left, rect.bottom - rect.top);
             this.Top = rect.top;
             this.Left = rect.left;
-
-
         }  
 
         private void SetupNotifyIcon()
@@ -444,11 +444,19 @@ namespace PocketTarkov
         {
             if (e == settings.hotkey01)// && e == Keys.V)
             {               
-                firstHotkeyPressed = true;      
-            }    
+                openCloseFirstHotkeyPressed = true;      
+            }            
             else if (e == settings.hotkey02)
             {
-                secondHotkeyPressed = true;
+                openCloseSecondHotkeyPressed = true;
+            }
+            if (e == settings.hotkey03)
+            {
+                clickableFirstHotkeyPressed = true;
+            }
+            else if (e == settings.hotkey04)
+            {
+                clickableSecondHotkeyPressed = true;
             }
             CheckKeyCombo();
         }
@@ -457,23 +465,51 @@ namespace PocketTarkov
         {
             if (e == settings.hotkey01)// && e == Keys.V)
             {
-                firstHotkeyPressed = false;
+                openCloseFirstHotkeyPressed = false;
             }
             else if (e == settings.hotkey02)
             {
-                secondHotkeyPressed = false;
+                openCloseSecondHotkeyPressed = false;
+            }
+            if (e == settings.hotkey03)
+            {
+                clickableFirstHotkeyPressed = false;
+            }
+            else if (e == settings.hotkey04)
+            {
+                clickableSecondHotkeyPressed = false;
             }
         }
 
         void CheckKeyCombo()
         {
-            if (firstHotkeyPressed && secondHotkeyPressed)
+            if (openCloseFirstHotkeyPressed && openCloseSecondHotkeyPressed)
             {
                 OpenOrCloseOverlay();
             }
-            else if (firstHotkeyPressed && settings.hotkey02 == default)
+            else if (openCloseFirstHotkeyPressed && settings.hotkey02 == default)
             {
                 OpenOrCloseOverlay();
+            }
+            if (clickableFirstHotkeyPressed && clickableSecondHotkeyPressed)
+            {
+                MakeSubFormsClickableOrUnclickable();
+            }
+            else if (clickableFirstHotkeyPressed && settings.hotkey04 == default)
+            {
+                MakeSubFormsClickableOrUnclickable();
+            }
+        }
+
+        private void MakeSubFormsClickableOrUnclickable()
+        {           
+            foreach(Form f in Application.OpenForms)
+            {
+                if (f is MyForm)
+                {
+                    MyForm myf = f as MyForm;
+                    myf.clickableCheckBox.Checked = !myf.clickableCheckBox.Checked;
+                }
             }
         }
 
@@ -507,6 +543,8 @@ namespace PocketTarkov
             string fileName = "/settings.txt";
             var path = folder + fileName;
 
+            settings.hotkey03 = Keys.LShiftKey;
+            settings.hotkey04 = Keys.M;
             using (FileStream stream = new FileStream(path, FileMode.OpenOrCreate))
             {
                 formatter.Serialize(stream, settings);
@@ -535,6 +573,8 @@ namespace PocketTarkov
                     System.Diagnostics.Debug.WriteLine("Error Loading: " + ea.Message);
                     settings.hotkey01 = Keys.LShiftKey;
                     settings.hotkey02 = Keys.C;
+                    settings.hotkey03 = Keys.LShiftKey;
+                    settings.hotkey04 = Keys.M;
                     settings.googleDocURL = "";                    
                 }
                 
@@ -543,6 +583,8 @@ namespace PocketTarkov
             {
                 settings.hotkey01 = Keys.LShiftKey;
                 settings.hotkey02 = Keys.C;
+                settings.hotkey03 = Keys.LShiftKey;
+                settings.hotkey04 = Keys.M;
                 settings.googleDocURL = "";
             }
         }

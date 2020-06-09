@@ -11,25 +11,12 @@ namespace PocketTarkov
 {
     public partial class Form_ShowMap : MyForm
     {
-        
-        PictureBox map = new PictureBox();
-        
-
-        //TrackBar opacityBar = new TrackBar();
-        //Label opacityBarLabel = new Label();
-        
-        //CheckBox keepOpenCheckBox = new CheckBox(); 
-        //Label keepOpenCheckBoxLabel = new Label();
-
-        //ToolStripControlHost opacityBarControlHost;
-        //ToolStripControlHost opacityBarLabelControlHost;
-        //ToolStripControlHost keepOpenCheckBoxControlHost;
-        //ToolStripControlHost keepOpenCheckBoxLabelControlHost;
-
-        string mapToShow;
-        //Form_RootOverlay rootOverlay;
+        private PictureBox map = new PictureBox();
+        private bool panning = false;
+        private string mapToShow;        
         private Point startingPoint = Point.Empty;
         private Point movingPoint = Point.Empty;
+
         public Form_ShowMap(Form_RootOverlay _rootOverlay, string mapName)
         {
             rootOverlay = _rootOverlay;
@@ -42,7 +29,6 @@ namespace PocketTarkov
             LoadFormProperties();
             LoadMapObject();
             AddMenuBar();
-
             LoadMap();
         }
 
@@ -86,23 +72,21 @@ namespace PocketTarkov
                     map.LoadAsync("https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/c/c8/Customs_Nuxx_20190106_1.2.png?version=a3b44edf49616eaad2736c6523c977b0");
                     break;
             }
-        }        
+        }
 
-        private bool panning = false;
-
-        void Map_MouseDown(object sender, MouseEventArgs e)
+        private void Map_MouseDown(object sender, MouseEventArgs e)
         {
             panning = true;
             startingPoint = new Point(e.Location.X - movingPoint.X,
                                       e.Location.Y - movingPoint.Y);
         }
 
-        void Map_MouseUp(object sender, MouseEventArgs e)
+        private void Map_MouseUp(object sender, MouseEventArgs e)
         {
             panning = false;
         }
 
-        void Map_MouseMove(object sender, MouseEventArgs e)
+        private void Map_MouseMove(object sender, MouseEventArgs e)
         {
             if (panning)
             {
@@ -112,7 +96,7 @@ namespace PocketTarkov
             }
         }
 
-        void Map_Paint(object sender, PaintEventArgs e)
+        private void Map_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(Color.White);
             e.Graphics.DrawImage(map.Image, movingPoint);
@@ -159,6 +143,5 @@ namespace PocketTarkov
             map.MouseMove -= Map_MouseMove;
             map.Paint -= Map_Paint;
         }
-
     }
 }

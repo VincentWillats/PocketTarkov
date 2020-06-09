@@ -36,9 +36,9 @@ This application simply sits over the top of Escape From Tarkov and displays web
 It pulls the tarkov window position and size from the windows API and does not interact with the cilent at all.
 
 ## Update Log
-- 09/06/2020 0.55 - Added window Opacity Slider, keep Open toggle and interactable toggle.
+- 09/06/2020 0.55 - Added window opacity slider, keep open toggle and interactable toggle.
 - 08/06/2020 0.51 - Minor bug fix.
-- 08/06/2020 0.5  - Initial Upload.
+- 08/06/2020 0.50 - Initial Upload.
 
 ### Feedback and about Me
 I am a new software developer, current learning everyday, making new projects and looking for work. Any suggestions, feedback or help is extremely welcome and if you need to contact me directly you can email me at VincentWillats.Software@gmail.com

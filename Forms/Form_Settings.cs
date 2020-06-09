@@ -13,8 +13,13 @@ namespace PocketTarkov
     {
         LowLevelKeyboardHook kbh;
         Form_RootOverlay rootOverlay;
+
+        string whatHoket;
         Keys pressedKey1;
         Keys pressedKey2;
+        Keys pressedKey3;
+        Keys pressedKey4;
+
         public Form_Settings(Form_RootOverlay _rootOverlay)
         {
             rootOverlay = _rootOverlay;
@@ -44,18 +49,32 @@ namespace PocketTarkov
 
             pressedKey1 = rootOverlay.settings.hotkey01;
             pressedKey2 = rootOverlay.settings.hotkey02;
+            pressedKey3 = rootOverlay.settings.hotkey03;
+            pressedKey4 = rootOverlay.settings.hotkey04;
 
             textbox_Hotkey.Text = pressedKey1.ToString() + " + " + pressedKey2.ToString();
+            textbox_Hotkey02.Text = pressedKey3.ToString() + " + " + pressedKey4.ToString();
         }
 
         private void textBox2_Enter(object sender, EventArgs e)
-        {            
+        {
+            whatHoket = "show/hide";
             pressedKey1 = default;
             pressedKey2 = default;
             TextBox txtbox = sender as TextBox;
             txtbox.Text = "Press Desired Hotkeys";
             SetKeyboardHookEvents();            
-        }         
+        }
+
+        private void textBox3_Enter(object sender, EventArgs e)
+        {
+            whatHoket = "interactable/not";
+            pressedKey3 = default;
+            pressedKey4 = default;
+            TextBox txtbox = sender as TextBox;
+            txtbox.Text = "Press Desired Hotkeys";
+            SetKeyboardHookEvents();
+        }
 
         private void btn_Save_Click(object sender, EventArgs e)
         {            
@@ -69,6 +88,11 @@ namespace PocketTarkov
                 rootOverlay.settings.hotkey01 = pressedKey1;
                 rootOverlay.settings.hotkey02 = pressedKey2;
             }
+            if (pressedKey3 != default)
+            {
+                rootOverlay.settings.hotkey03 = pressedKey3;
+                rootOverlay.settings.hotkey04 = pressedKey4;
+            }
             if (!String.IsNullOrEmpty(textbox_GoogleSheet.Text))
             {
                 rootOverlay.settings.googleDocURL = textbox_GoogleSheet.Text;
@@ -78,19 +102,39 @@ namespace PocketTarkov
         
         void kbh_OnKeyPressed(object sender, Keys e)
         {
-            if (pressedKey1 == default || pressedKey2 == default)
+            if(whatHoket == "show/hide")
             {
-                if (pressedKey1 == default)
-                {     
-                    pressedKey1 = e;
-                    textbox_Hotkey.Text = pressedKey1.ToString();
-                }
-                else if (e != pressedKey1)
+                if (pressedKey1 == default || pressedKey2 == default)
                 {
-                    pressedKey2 = e;
-                    textbox_Hotkey.Text = pressedKey1.ToString() + " + " + pressedKey2.ToString();                    
+                    if (pressedKey1 == default)
+                    {
+                        pressedKey1 = e;
+                        textbox_Hotkey.Text = pressedKey1.ToString();
+                    }
+                    else if (e != pressedKey1)
+                    {
+                        pressedKey2 = e;
+                        textbox_Hotkey.Text = pressedKey1.ToString() + " + " + pressedKey2.ToString();
+                    }
                 }
             }
+            else if (whatHoket == "interactable/not")
+            {
+                if (pressedKey3 == default || pressedKey4 == default)
+                {
+                    if (pressedKey3 == default)
+                    {
+                        pressedKey3 = e;
+                        textbox_Hotkey02.Text = pressedKey3.ToString();
+                    }
+                    else if (e != pressedKey3)
+                    {
+                        pressedKey4 = e;
+                        textbox_Hotkey02.Text = pressedKey3.ToString() + " + " + pressedKey4.ToString();
+                    }
+                }
+            }
+            
         }
 
         void kbh_OnKeyUnpressed(object sender, Keys e)
@@ -110,13 +154,17 @@ namespace PocketTarkov
         {
             kbh.OnKeyPressed -= kbh_OnKeyPressed;
             kbh.OnKeyUnpressed -= kbh_OnKeyUnpressed;
-            kbh.UnHookKeyboard();
-            //kbh = null;
+            kbh.UnHookKeyboard();           
         }
 
         private void Form_Settings_FormClosing(object sender, FormClosingEventArgs e)
         {
             Save();
+        }
+
+        private void textbox_Hotkey_Leave(object sender, EventArgs e)
+        {
+            whatHoket = "";
         }
     }
 }

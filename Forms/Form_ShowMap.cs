@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PocketTarkov.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,13 +9,14 @@ using System.Windows.Forms;
 
 namespace PocketTarkov
 {
-    public partial class Form_ShowMap : Form
+    public partial class Form_ShowMap : MyForm
     {
-        PictureBox map = new PictureBox();
-        string mapToShow;
-        Form_RootOverlay rootOverlay;
+        private PictureBox map = new PictureBox();
+        private bool panning = false;
+        private string mapToShow;        
         private Point startingPoint = Point.Empty;
         private Point movingPoint = Point.Empty;
+
         public Form_ShowMap(Form_RootOverlay _rootOverlay, string mapName)
         {
             rootOverlay = _rootOverlay;
@@ -24,32 +26,22 @@ namespace PocketTarkov
 
         private void Form_ShowMap_Load(object sender, EventArgs e)
         {
-            LoadProperties();
+            LoadFormProperties();
+            LoadMapObject();
+            AddMenuBar();
             LoadMap();
         }
 
-        private void LoadProperties()
-        {
-            //this.ShowInTaskbar = false;
-            this.TopMost = true;            
-            this.BackColor = Color.Wheat;
-            //this.TransparencyKey = Color.Wheat;
-            this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
-            this.StartPosition = FormStartPosition.Manual;
-            this.Size = new Size(rootOverlay.Width / 2, rootOverlay.Height / 2);
-            //this.Location = rootOverlay.Location;
-            this.Location = new Point(
-                rootOverlay.ClientSize.Width / 2 - this.Size.Width / 2 + rootOverlay.Left,
-                rootOverlay.ClientSize.Height / 2 - this.Size.Height / 2);
-
-
-           
+        private void LoadMapObject()
+        {     
+            // Set Map Properties
+            map.Top = ms.Bottom;
             map.MouseDoubleClick += new MouseEventHandler(Map_DoubleClick);            
             map.SizeMode = PictureBoxSizeMode.StretchImage;
-            map.Dock = DockStyle.Fill;
+            map.Dock = DockStyle.Fill;            
+            // Add Controls to Form
             this.Controls.Add(map);            
         }
- 
 
         private void LoadMap()
         {
@@ -80,23 +72,21 @@ namespace PocketTarkov
                     map.LoadAsync("https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/c/c8/Customs_Nuxx_20190106_1.2.png?version=a3b44edf49616eaad2736c6523c977b0");
                     break;
             }
-        }        
+        }
 
-        private bool panning = false;
-
-        void Map_MouseDown(object sender, MouseEventArgs e)
+        private void Map_MouseDown(object sender, MouseEventArgs e)
         {
             panning = true;
             startingPoint = new Point(e.Location.X - movingPoint.X,
                                       e.Location.Y - movingPoint.Y);
         }
 
-        void Map_MouseUp(object sender, MouseEventArgs e)
+        private void Map_MouseUp(object sender, MouseEventArgs e)
         {
             panning = false;
         }
 
-        void Map_MouseMove(object sender, MouseEventArgs e)
+        private void Map_MouseMove(object sender, MouseEventArgs e)
         {
             if (panning)
             {
@@ -106,7 +96,7 @@ namespace PocketTarkov
             }
         }
 
-        void Map_Paint(object sender, PaintEventArgs e)
+        private void Map_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(Color.White);
             e.Graphics.DrawImage(map.Image, movingPoint);
@@ -153,6 +143,5 @@ namespace PocketTarkov
             map.MouseMove -= Map_MouseMove;
             map.Paint -= Map_Paint;
         }
-        
     }
 }

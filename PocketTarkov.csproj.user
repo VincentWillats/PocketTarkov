@@ -5,6 +5,9 @@
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Classes\MyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Form_Nav.cs">
       <SubType>Form</SubType>
     </Compile>

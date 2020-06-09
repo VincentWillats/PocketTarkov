@@ -1,4 +1,5 @@
 ﻿using Microsoft.Toolkit.Forms.UI.Controls;
+using PocketTarkov.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,13 +10,13 @@ using System.Windows.Forms;
 
 namespace PocketTarkov
 {
-    public partial class Form_ShowWebpage : Form
-    {
-        Form_RootOverlay rootOverlay;
+    public partial class Form_ShowWebpage : MyForm
+    {        
         WebViewCompatible webBrowser;
         string webpageName;
         string webpageUrlString;
         Uri webpageUri;
+
         public Form_ShowWebpage(Form_RootOverlay _rootOverlay, string _webpageName)
         {
             webpageName = _webpageName;
@@ -25,8 +26,10 @@ namespace PocketTarkov
 
         private void Form_ShowWebpage_Load(object sender, EventArgs e)
         {
-            LoadProperties();
-            LoadWebpage();
+            LoadFormProperties();
+            LoadWebBrowserObject();
+            AddMenuBar();
+            LoadWebpage();     
         }
 
         private void LoadWebpage()
@@ -60,7 +63,6 @@ namespace PocketTarkov
                         webpageUrlString = rootOverlay.settings.googleDocURL;
                     }                    
                     break;
-
             }
             try
             {
@@ -70,30 +72,15 @@ namespace PocketTarkov
             catch (Exception ea)
             {
                 System.Diagnostics.Debug.WriteLine("Error connecting to webpage: " + ea.Message);
-            }
-            
+            }            
         }
 
-        private void LoadProperties()
-        {
-            //this.ShowInTaskbar = false;
-            this.TopLevel = true;
-            this.TopMost = true;
-            this.BackColor = Color.Wheat;
-            this.TransparencyKey = Color.Wheat;
-            this.FormBorderStyle = FormBorderStyle.SizableToolWindow;
-            this.StartPosition = FormStartPosition.Manual;
-            this.Size = new Size(rootOverlay.Width / 2, rootOverlay.Height / 2);
-            
-            this.Location = new Point(
-                rootOverlay.ClientSize.Width / 2 - this.Size.Width / 2 + rootOverlay.Left,
-                rootOverlay.ClientSize.Height / 2 - this.Size.Height / 2);
-
+        private void LoadWebBrowserObject()
+        {           
             webBrowser = new WebViewCompatible();
             webBrowser.Size = this.Size;
             webBrowser.Dock = DockStyle.Fill;
             this.Controls.Add(webBrowser);
-            
         }
     }
 }

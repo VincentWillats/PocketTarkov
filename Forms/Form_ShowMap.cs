@@ -33,14 +33,18 @@ namespace PocketTarkov
         }
 
         private void LoadMapObject()
-        {     
+        {
+            
             // Set Map Properties
             map.Top = ms.Bottom;
+            
+            
             map.MouseDoubleClick += new MouseEventHandler(Map_DoubleClick);            
             map.SizeMode = PictureBoxSizeMode.StretchImage;
             map.Dock = DockStyle.Fill;            
             // Add Controls to Form
-            this.Controls.Add(map);            
+
+            this.Controls.Add(map);
         }
 
         private void LoadMap()

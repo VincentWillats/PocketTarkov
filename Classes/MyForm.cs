@@ -15,6 +15,7 @@ namespace PocketTarkov.Classes
         private const int sizeableGrabSize = 16;
         protected Form_RootOverlay rootOverlay;
         protected MenuStrip ms = new MenuStrip();
+
         TrackBar opacityBar = new TrackBar();
         Label opacityBarLabel = new Label();
 
@@ -44,13 +45,23 @@ namespace PocketTarkov.Classes
         static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
         [DllImport("user32.dll", SetLastError = true)]
-        static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+        static extern int GetWindowLong(IntPtr hWnd, int nIndex);               
+
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr a, int msg, int wParam, int lParam);
+
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+
 
 
         protected void AddMenuBar()
         {
             // Set OpacityBar/Label Properties
             opacityBarLabel.Text = "Transparency";
+            opacityBarLabel.MouseDown += new MouseEventHandler(this.DragForm_MouseDown);
             opacityBar.AutoSize = false;
             opacityBar.Height = 20;
             opacityBar.TickStyle = TickStyle.None;
@@ -59,14 +70,17 @@ namespace PocketTarkov.Classes
             opacityBar.Value = 100;
             opacityBar.ValueChanged += new EventHandler(ChangeOpacity);
 
+
             // Set KeepOpen Checkbox/Label Properties
             keepOpenCheckBoxLabel.Text = "Keep Window Open";
             keepOpenCheckBoxLabel.Padding = new Padding(40, 0, 0, 0);
+            keepOpenCheckBoxLabel.MouseDown += new MouseEventHandler(this.DragForm_MouseDown);
             keepOpenCheckBox.CheckedChanged += new EventHandler(KeepOpen);
 
             // Set Clickable Checkbox/Label Properties
             clickableCheckBoxLabel.Text = "Interactable (" + rootOverlay.settings.hotkey03.ToString() + " + " + rootOverlay.settings.hotkey04.ToString() + ")";
             clickableCheckBoxLabel.Padding = new Padding(40, 0, 0, 0);
+            clickableCheckBoxLabel.MouseDown += new MouseEventHandler(this.DragForm_MouseDown);
             clickableCheckBox.Checked = true;
             clickableCheckBox.CheckedChanged += new EventHandler(Clickable);
 
@@ -101,6 +115,9 @@ namespace PocketTarkov.Classes
 
 
             // Set Add ControlHosts too MainMenuStrip
+
+            ms.MouseDown += new MouseEventHandler(this.DragForm_MouseDown);
+
             ms.Items.Add(opacityBarLabelControlHost);
             ms.Items.Add(opacityBarControlHost);
 
@@ -119,12 +136,14 @@ namespace PocketTarkov.Classes
         }
 
         private void CloseWindow(object sender, EventArgs e)
-        {
+        {    
             this.Close();
+            this.Dispose();
         }
 
         protected void LoadFormProperties()
         {
+            //dragControl.SelectControl = ms;
             this.Padding = new Padding(2, 2, 2, 2);
             this.MainMenuStrip = ms;
             this.TopMost = true;
@@ -135,8 +154,7 @@ namespace PocketTarkov.Classes
             this.Location = new Point(
                 rootOverlay.ClientSize.Width / 2 - this.Size.Width / 2 + rootOverlay.Left,
                 rootOverlay.ClientSize.Height / 2 - this.Size.Height / 2);
-        }       
-
+        }        
 
 
         // Resize
@@ -181,6 +199,16 @@ namespace PocketTarkov.Classes
             SetClickableOrNot();
         }
 
+        private void DragForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            bool flag = e.Button == MouseButtons.Left;
+            if (flag)
+            {
+                DragControl.ReleaseCapture();
+                DragControl.SendMessage(this.FindForm().Handle, 161, 2, 0);
+            }
+        }
+
         public void SetClickableOrNot()
         {
             if (clickableCheckBox.Checked)
@@ -217,5 +245,7 @@ namespace PocketTarkov.Classes
             this.ResumeLayout(false);
 
         }
+
+
     }
 }

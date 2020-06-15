@@ -71,6 +71,10 @@ namespace PocketTarkov
                     this.Text = "Customs Map";
                     map.LoadAsync("https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/c/c8/Customs_Nuxx_20190106_1.2.png?version=a3b44edf49616eaad2736c6523c977b0");
                     break;
+                case "labsMap":
+                    this.Text = "Labs Map";
+                    map.LoadAsync("https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/6/6d/The_Lab_3D_map_by_SteelSmith_TTV.png?version=eac76b7104ce4c4e38dac1cfb0b01906");
+                    break;
             }
         }
 

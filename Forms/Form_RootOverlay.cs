@@ -254,7 +254,7 @@ namespace PocketTarkov
             taskItemTracker.Image = Properties.Resources.taskTracker;
             taskNavPanel.Refresh();
             taskItemTracker.SizeMode = PictureBoxSizeMode.AutoSize;
-            taskItemTracker.Top = wiki.Bottom;
+            taskItemTracker.Top = wiki.Bottom + 2;
             taskItemTracker.Name = "taskItemTracker";
             taskItemTracker.MouseClick += new MouseEventHandler(WebpageClicked);
             taskItemTracker.BackColor = Color.Transparent;
@@ -286,7 +286,7 @@ namespace PocketTarkov
             noFoodsG.Image = Properties.Resources.nofoodsGDoc;
             noFoodsG.Refresh();
             noFoodsG.SizeMode = PictureBoxSizeMode.AutoSize;
-            noFoodsG.Top = eftMonster.Bottom;
+            noFoodsG.Top = eftMonster.Bottom + 2;
             noFoodsG.Name = "noFoodGoogleDoc";
             noFoodsG.MouseClick += new MouseEventHandler(WebpageClicked);
             noFoodsG.BackColor = Color.Transparent;
@@ -295,7 +295,7 @@ namespace PocketTarkov
             wiki.Image = Properties.Resources.wiki;
             wiki.Refresh();
             wiki.SizeMode = PictureBoxSizeMode.AutoSize;
-            wiki.Top = noFoodsG.Bottom;
+            wiki.Top = noFoodsG.Bottom + 2;
             wiki.Name = "wikiAmmo";
             wiki.MouseClick += new MouseEventHandler(WebpageClicked);
             wiki.BackColor = Color.Transparent;
@@ -329,7 +329,7 @@ namespace PocketTarkov
             interchangeMap.Image = Properties.Resources.mapNameInterchange;
             interchangeMap.Refresh();
             interchangeMap.SizeMode = PictureBoxSizeMode.AutoSize;
-            interchangeMap.Top = factoryMap.Bottom;
+            interchangeMap.Top = factoryMap.Bottom + 2;
             interchangeMap.Left = titleMaps.Left;
             interchangeMap.Name = "interchangeMap";
             interchangeMap.MouseClick += new MouseEventHandler(ImageClicked);
@@ -339,7 +339,7 @@ namespace PocketTarkov
             reserveMap.Image = Properties.Resources.mapNameReserve;
             reserveMap.Refresh();
             reserveMap.SizeMode = PictureBoxSizeMode.AutoSize;
-            reserveMap.Top = interchangeMap.Bottom;
+            reserveMap.Top = interchangeMap.Bottom + 2;
             reserveMap.Left = titleMaps.Left;
             reserveMap.MouseClick += new MouseEventHandler(ImageClicked);
             reserveMap.Name = "reserveMap";
@@ -349,7 +349,7 @@ namespace PocketTarkov
             woodsMap.Image = Properties.Resources.mapNameWoods;
             woodsMap.Refresh();
             woodsMap.SizeMode = PictureBoxSizeMode.AutoSize;
-            woodsMap.Top = reserveMap.Bottom;
+            woodsMap.Top = reserveMap.Bottom + 2;
             woodsMap.Left = titleMaps.Left;
             woodsMap.MouseClick += new MouseEventHandler(ImageClicked);
             woodsMap.Name = "woodsMap";
@@ -359,7 +359,7 @@ namespace PocketTarkov
             shorelineMap.Image = Properties.Resources.mapNameShoreline;
             shorelineMap.Refresh();
             shorelineMap.SizeMode = PictureBoxSizeMode.AutoSize;
-            shorelineMap.Top = woodsMap.Bottom;
+            shorelineMap.Top = woodsMap.Bottom + 2;
             shorelineMap.Left = titleMaps.Left;
             shorelineMap.MouseClick += new MouseEventHandler(ImageClicked);
             shorelineMap.Name = "shorelineMap";
@@ -369,11 +369,21 @@ namespace PocketTarkov
             customsMap.Image = Properties.Resources.mapNameCustoms;
             customsMap.Refresh();
             customsMap.SizeMode = PictureBoxSizeMode.AutoSize;
-            customsMap.Top = shorelineMap.Bottom;
+            customsMap.Top = shorelineMap.Bottom + 2;
             customsMap.Left = titleMaps.Left;
             customsMap.MouseClick += new MouseEventHandler(ImageClicked);
             customsMap.Name = "customsMap";
             customsMap.BackColor = Color.Transparent;
+
+            PictureBox labsMap = new PictureBox();
+            labsMap.Image = Properties.Resources.mapNameLabs;
+            labsMap.Refresh();
+            labsMap.SizeMode = PictureBoxSizeMode.AutoSize;
+            labsMap.Top = customsMap.Bottom + 2;
+            labsMap.Left = titleMaps.Left;
+            labsMap.MouseClick += new MouseEventHandler(ImageClicked);
+            labsMap.Name = "labsMap";
+            labsMap.BackColor = Color.Transparent;
 
             mapNavPanel.Controls.Add(titleMaps);
             mapNavPanel.Controls.Add(factoryMap);
@@ -382,6 +392,7 @@ namespace PocketTarkov
             mapNavPanel.Controls.Add(woodsMap);
             mapNavPanel.Controls.Add(shorelineMap);
             mapNavPanel.Controls.Add(customsMap);
+            mapNavPanel.Controls.Add(labsMap);
         }
 
         private void NotifyIconDoubleClick(object Sender, EventArgs e)

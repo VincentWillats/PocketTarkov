@@ -113,6 +113,16 @@ namespace PocketTarkov.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mapNameLabs {
+            get {
+                object obj = ResourceManager.GetObject("mapNameLabs", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mapNameReserve {
             get {
                 object obj = ResourceManager.GetObject("mapNameReserve", resourceCulture);

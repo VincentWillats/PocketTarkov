@@ -5,6 +5,9 @@
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Classes\DragControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Classes\MyForm.cs">
       <SubType>Form</SubType>
     </Compile>

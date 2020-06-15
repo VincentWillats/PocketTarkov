@@ -129,7 +129,6 @@
         private System.Windows.Forms.TextBox textbox_Hotkey;
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textbox_Hotkey02;
     }

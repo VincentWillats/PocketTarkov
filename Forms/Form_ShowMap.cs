@@ -204,24 +204,16 @@ namespace PocketTarkov
                 
             if(upOrDown > 0)
             {
-                if (scale <= 1)
+                if ((scale + 0.1) <= 1)
                 {
                     scale += 0.1;
-                }
-                else 
-                {
-                    return;
                 }
             }
             if (upOrDown < 0)
             {
-                if (scale > 0.3)
+                if ((scale - 0.1) > 0.3)
                 {
                     scale -= 0.1;
-                }
-                else
-                {
-                    return;
                 }
             } 
             tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));           

@@ -47,8 +47,7 @@ namespace PocketTarkov
         private void LoadMapObject()
         {            
             // Set Map Properties
-            map.Top = ms.Bottom;           
-            
+            map.Top = ms.Bottom;  
             map.MouseDoubleClick += new MouseEventHandler(Map_DoubleClick);            
             map.MouseWheel += new MouseEventHandler(Map_Zoom);            
             map.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -97,7 +96,6 @@ namespace PocketTarkov
             orginalSize = map.Image.Size;
             AddZoomPanEvents();
         }
-
 
         private void DisposeImages(object sender, FormClosedEventArgs e)
         {
@@ -244,14 +242,6 @@ namespace PocketTarkov
             map.MouseUp += new MouseEventHandler(Map_MouseUp);
             map.MouseMove += new MouseEventHandler(Map_MouseMove);
             map.Paint += new PaintEventHandler(Map_Paint);
-        }
-
-        private void RemoveZoomPanEvents()
-        {
-            map.MouseDown -= Map_MouseDown;
-            map.MouseUp -= Map_MouseUp;
-            map.MouseMove -= Map_MouseMove;
-            map.Paint -= Map_Paint;
         }
     }
 }

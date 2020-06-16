@@ -39,8 +39,8 @@ namespace PocketTarkov
         {
             LoadFormProperties();
             LoadMapObject();
-            AddMenuBar();
-            LoadMapAsync();
+            AddMenuBar(true);
+            AddMenuBarMapOptions();
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.DisposeImages);
         }
 
@@ -58,44 +58,125 @@ namespace PocketTarkov
             this.Controls.Add(map);
         }        
 
-        private async void LoadMapAsync()
+        private void AddMenuBarMapOptions()
         {
             switch (mapToShow)
             {
                 case "shorelineMap":
-                    this.Text = "Shoreline Map";
-                    orginalImage = await getImage("https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/d/d4/Shoreline_marvelin_2_updated.png?version=f28651df0d566bdc1996aeeacb496d15");
+                    mapVersionComboBox.Items.Add("Shoreline 2D");
+                    mapVersionComboBox.Items.Add("Shoreline 3D");
+                    mapVersionComboBox.Items.Add("Shoreline Keys");
+                    mapVersionComboBox.Items.Add("Shoreline Resort");
                     break;
                 case "woodsMap":
-                    this.Text = "Woods Map";
-                    orginalImage = await getImage("https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/0/05/Glory4lyfeWoods_map_v4_marked.png?version=c8013bc33cac57aac03a780f93daf13c");
-                    break;
+                    mapVersionComboBox.Items.Add("Woods");
+                    break;                    
                 case "reserveMap":
-                    this.Text = "Reserve Map";
-                    orginalImage = await getImage("https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/9/9f/Keys_and_doors_v3.png?version=2cb6d8d74e6f3a52b8af30ca93bc86f5");
+                    mapVersionComboBox.Items.Add("Reserve 2D");
+                    mapVersionComboBox.Items.Add("Reserve 3D 01");
+                    mapVersionComboBox.Items.Add("Reserve 3D 02");
+                    mapVersionComboBox.Items.Add("Reserve Underground");
                     break;
                 case "interchangeMap":
-                    this.Text = "Interchange Map";
-                    orginalImage = await getImage("https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/e/e5/InterchangeMap_Updated_4.24.2020.png?version=c1114bd10889074ca8c8d85e3d1fb04b");
+                    mapVersionComboBox.Items.Add("Interchange");
+                    mapVersionComboBox.Items.Add("Interchange Stashes");
                     break;
                 case "factoryMap":
-                    this.Text = "Factory Map";
-                    orginalImage = await getImage("https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/c/cd/Factory_3D_b_Johnny_Tushonka.jpg?version=ce869f3014fc2e9f03becd479a4a8d4c");
+                    mapVersionComboBox.Items.Add("Factory");
                     break;
                 case "customsMap":
-                    this.Text = "Customs Map";
-                    orginalImage = await getImage("https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/c/c8/Customs_Nuxx_20190106_1.2.png?version=a3b44edf49616eaad2736c6523c977b0");
+                    mapVersionComboBox.Items.Add("Customs 3D");
+                    mapVersionComboBox.Items.Add("Customs Dorms");                    
                     break;
                 case "labsMap":
-                    this.Text = "Labs Map";
-                    orginalImage = await getImage("https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/6/6d/The_Lab_3D_map_by_SteelSmith_TTV.png?version=eac76b7104ce4c4e38dac1cfb0b01906");
-                    break;                    
+                    mapVersionComboBox.Items.Add("Labs 3D");
+                    mapVersionComboBox.Items.Add("Labs Basement");
+                    mapVersionComboBox.Items.Add("Labs First Floor");
+                    mapVersionComboBox.Items.Add("Labs Second Floor");
+                    break;
             }
-            _orginalImage = new Bitmap(orginalImage);
-            map.Image = _orginalImage;
-            orginalSize = map.Image.Size;
-            AddZoomPanEvents();
+            mapVersionComboBox.SelectedIndexChanged += new EventHandler(SelectedMapChanged);
+            mapVersionComboBox.SelectedIndex = 0;
         }
+
+        private void SelectedMapChanged(object sender, EventArgs e)
+        {
+            if (orginalImage != null) { orginalImage.Dispose(); }
+            ComboBox comboBox = (ComboBox)sender;
+            string selectedMap = comboBox.GetItemText(comboBox.SelectedItem);
+            switch (selectedMap)
+            {
+                case "Shoreline 2D":
+                    orginalImage = Properties.Resources.shoreline2d;
+                    break;
+                case "Shoreline 3D":
+                    orginalImage = Properties.Resources.shoreline3d;
+                    break;
+                case "Shoreline Keys":
+                    orginalImage = Properties.Resources.shorelineKeys;
+                    break;
+                case "Shoreline Resort":
+                    orginalImage = Properties.Resources.shorelineResort;
+                    break;
+                case "Woods":
+                    orginalImage = Properties.Resources.woods;
+                    break;
+                case "Reserve 2D":
+                    orginalImage = Properties.Resources.reserve2d;
+                    break;
+                case "Reserve 3D 01":
+                    orginalImage = Properties.Resources.reserve3d01;
+                    break;
+                case "Reserve 3D 02":
+                    orginalImage = Properties.Resources.reserve3d02;
+                    break;
+                case "Reserve Underground":
+                    orginalImage = Properties.Resources.reserveUnderground;
+                    break;
+                case "Interchange":
+                    orginalImage = Properties.Resources.interchange;
+                    break;
+                case "Interchange Stashes":
+                    orginalImage = Properties.Resources.interchangeStashes;
+                    break;
+                case "Factory":
+                    orginalImage = Properties.Resources.factory3d;
+                    break;
+                case "Customs 3D":
+                    orginalImage = Properties.Resources.customs3d;
+                    break;
+                case "Customs Dorms":
+                    orginalImage = Properties.Resources.customsDorms;
+                    break;
+                case "Labs 3D":
+                    orginalImage = Properties.Resources.theLab3d;
+                    break;
+                case "Labs Basement":
+                    orginalImage = Properties.Resources.theLabBasement;
+                    break;
+                case "Labs First Floor":
+                    orginalImage = Properties.Resources.theLabFirstFloor;
+                    break;
+                case "Labs Second Floor":
+                    orginalImage = Properties.Resources.theLabSecondFloor;
+                    break;
+            }
+            orginalSize = orginalImage.Size;
+            scale = 0.3;
+            tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));
+            
+            if(map.Image != null)
+            {                
+                map.Image.Dispose();
+            }
+            if(_orginalImage != null)
+            {
+                _orginalImage.Dispose();
+            }   
+            _orginalImage = resizeImage(orginalImage, tempSize);
+            map.Image = _orginalImage;
+            AddZoomPanEvents();
+        } 
 
         private void DisposeImages(object sender, FormClosedEventArgs e)
         {
@@ -127,13 +208,12 @@ namespace PocketTarkov
 
         private void Map_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
-                return;
-            }
-            panning = true;
-            startingPoint = new Point(e.Location.X - movingPoint.X,
-                                      e.Location.Y - movingPoint.Y);
+                panning = true;
+                startingPoint = new Point(e.Location.X - movingPoint.X,
+                                          e.Location.Y - movingPoint.Y);
+            }            
         }
 
         private void Map_MouseUp(object sender, MouseEventArgs e)
@@ -161,7 +241,7 @@ namespace PocketTarkov
             {
                 movingPoint.X = 0;
             }
-            if(movingPoint.Y < (map.Image.Height - this.Height) * -1)
+            if (movingPoint.Y < (map.Image.Height - this.Height) * -1)
             {
                 movingPoint.Y = (map.Image.Height - this.Height) * -1;
             }
@@ -169,8 +249,10 @@ namespace PocketTarkov
             {
                 movingPoint.Y = 0;
             }
+
             e.Graphics.Clear(Color.White);            
             e.Graphics.DrawImage(map.Image, movingPoint);
+            System.Diagnostics.Debug.WriteLine("Moving point = X: " + movingPoint.X.ToString() + " Y: " + movingPoint.Y.ToString());
         }
 
         private void Map_DoubleClick(object sender, MouseEventArgs e)
@@ -180,22 +262,24 @@ namespace PocketTarkov
                 if(scale != 1)
                 {
                     scale = 1;
-                    tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));
-                    map.Image = null;
-                    _orginalImage.Dispose();
-                    _orginalImage = resizeImage(orginalImage, tempSize);
-                    map.Image = _orginalImage;
                 }
                 else
                 {
-                    scale = 0.2;
-                    tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));
-                    map.Image = null;
-                    _orginalImage.Dispose();
-                    _orginalImage = resizeImage(orginalImage, tempSize);
-                    map.Image = _orginalImage;
+                    scale = 0.2;   
                 }
-            }
+                // Set zoom point to middle of the screen.
+                double xPerc = (double)(movingPoint.X * -1 + e.X) / (double)(tempSize.Width);
+                double yPerc = (double)(movingPoint.Y * -1 + e.Y) / (double)(tempSize.Height);
+                tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));
+                int newX = (int)(tempSize.Width * xPerc);
+                int newY = (int)(tempSize.Height * yPerc);
+                movingPoint = new Point(newX * -1 + (map.Width / 2), newY * -1 + (map.Height / 2));
+
+                map.Image = null;
+                _orginalImage.Dispose();
+                _orginalImage = resizeImage(orginalImage, tempSize);
+                map.Image = _orginalImage;
+            }            
         }
 
         private void Map_Zoom(object sender, MouseEventArgs e)
@@ -204,31 +288,33 @@ namespace PocketTarkov
                 
             if(upOrDown > 0)
             {
-                if (scale <= 1)
+                if ((scale + 0.1) <= 1)
                 {
                     scale += 0.1;
-                }
-                else 
-                {
-                    return;
                 }
             }
             if (upOrDown < 0)
             {
-                if (scale > 0.3)
+                if ((scale - 0.1) > 0.3)
                 {
                     scale -= 0.1;
                 }
-                else
-                {
-                    return;
-                }
-            } 
-            tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));           
+            }
+
+            // Set zoom point to middle of the screen.
+            double xPerc = (double)(movingPoint.X * -1 + e.X) / (double)(tempSize.Width);
+            double yPerc = (double)(movingPoint.Y * -1 + e.Y) / (double)(tempSize.Height);      
+            tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));
+            int newX = (int)(tempSize.Width * xPerc);
+            int newY = (int)(tempSize.Height * yPerc);
+            movingPoint = new Point(newX*-1 + (map.Width / 2), newY*-1 + (map.Height / 2));
+   
             map.Image = null;
             _orginalImage.Dispose();
             _orginalImage = resizeImage(orginalImage, tempSize);
             map.Image = _orginalImage;
+
+            
         }
 
         public static Image resizeImage(Image imgToResize, Size size)

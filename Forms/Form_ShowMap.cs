@@ -21,7 +21,6 @@ namespace PocketTarkov
         private Point startingPoint = Point.Empty;
         private Point movingPoint = Point.Empty;
 
-
         private Image orginalImage;
         private Image _orginalImage;
         private Size orginalSize;
@@ -94,6 +93,9 @@ namespace PocketTarkov
                     mapVersionComboBox.Items.Add("Labs First Floor");
                     mapVersionComboBox.Items.Add("Labs Second Floor");
                     break;
+                case "questItems":
+                    mapVersionComboBox.Items.Add("Task Item Tracker");
+                    break;
             }
             mapVersionComboBox.SelectedIndexChanged += new EventHandler(SelectedMapChanged);
             mapVersionComboBox.SelectedIndex = 0;
@@ -160,6 +162,11 @@ namespace PocketTarkov
                 case "Labs Second Floor":
                     orginalImage = Properties.Resources.theLabSecondFloor;
                     break;
+                case "Task Item Tracker":
+                    orginalImage = Properties.Resources.questItemRequirements;
+                    mapVersionComboBox.Visible = false;
+                    mapVersionComboBoxLabel.Visible = false;
+                    break;
             }
             orginalSize = orginalImage.Size;
             scale = 0.3;
@@ -185,26 +192,6 @@ namespace PocketTarkov
             _orginalImage.Dispose();
         }
 
-        async Task<Image> getImage(string imgUrl)
-        {
-            Image map = null;
-            using (var client = new HttpClient())
-            {
-                var response = await client.GetAsync(imgUrl);
-                
-                if (response != null && response.StatusCode == HttpStatusCode.OK)
-                {
-                    using (var stream = await response.Content.ReadAsStreamAsync())
-                    {
-                        var memStream = new MemoryStream();
-                        await stream.CopyToAsync(memStream);
-                        memStream.Position = 0;
-                        map = Image.FromStream(memStream);
-                    }
-                }
-            }
-            return map;
-        }
 
         private void Map_MouseDown(object sender, MouseEventArgs e)
         {

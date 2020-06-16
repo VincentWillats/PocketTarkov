@@ -12,8 +12,8 @@ using Windows.UI.Xaml;
 namespace PocketTarkov
 {
     public partial class Form_ShowWebpage : MyForm
-    {        
-        WebViewCompatible webBrowser;
+    {
+        WebViewCompatible webBrowser = new WebViewCompatible();
         string webpageName;
         string webpageUrlString;
         Uri webpageUri;
@@ -31,7 +31,13 @@ namespace PocketTarkov
             LoadWebBrowserObject();
             AddMenuBar(false);
             AddWebNavigateButtons();
-            LoadWebpage();     
+            LoadWebpage();
+            this.FormClosing += new FormClosingEventHandler(this.DisposeBrowser);
+        }
+
+        private void DisposeBrowser(object sender, FormClosingEventArgs e)
+        {
+            webBrowser.Dispose();            
         }
 
         private void LoadWebpage()
@@ -104,12 +110,12 @@ namespace PocketTarkov
 
         private void BackClicked(object sender, EventArgs e)
         {
-            webBrowser.GoBack();
+           webBrowser.GoBack();
         }
 
         private void LoadWebBrowserObject()
-        {           
-            webBrowser = new WebViewCompatible();
+        {
+            // webBrowser = new WebViewCompatible();
             webBrowser.Size = this.Size;
             webBrowser.Dock = DockStyle.Fill;
             this.Controls.Add(webBrowser);

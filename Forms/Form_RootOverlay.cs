@@ -238,7 +238,7 @@ namespace PocketTarkov
         private void AddTaskPanelButtons()
         {
             PictureBox titleTasks = new PictureBox();
-            titleTasks.Image = Properties.Resources.tasks;
+            titleTasks.Image = Properties.Resources.quests;
             titleTasks.Refresh();
             titleTasks.SizeMode = PictureBoxSizeMode.AutoSize;
             titleTasks.Padding = new Padding(10, 10, 0, 0);
@@ -254,11 +254,21 @@ namespace PocketTarkov
             wiki.MouseClick += new MouseEventHandler(WebpageClicked);
             wiki.BackColor = Color.Transparent;
 
+            PictureBox taskItemsImg = new PictureBox();
+            taskItemsImg.Image = Properties.Resources.questItems;
+            taskItemsImg.Refresh();
+            taskItemsImg.SizeMode = PictureBoxSizeMode.AutoSize;
+            taskItemsImg.Top = wiki.Bottom + 2;
+            taskItemsImg.Padding = new Padding(10, 0, 0, 0);
+            taskItemsImg.Name = "questItems";
+            taskItemsImg.MouseClick += new MouseEventHandler(ImageClicked);
+            taskItemsImg.BackColor = Color.Transparent;
+
             PictureBox taskItemTracker = new PictureBox();
-            taskItemTracker.Image = Properties.Resources.taskTracker;
-            taskNavPanel.Refresh();
+            taskItemTracker.Image = Properties.Resources.questItemTracker;
+            taskItemTracker.Refresh();
             taskItemTracker.SizeMode = PictureBoxSizeMode.AutoSize;
-            taskItemTracker.Top = wiki.Bottom + 2;
+            taskItemTracker.Top = taskItemsImg.Bottom + 2;
             taskItemTracker.Padding = new Padding(10, 0, 0, 10);
             taskItemTracker.Name = "taskItemTracker";
             taskItemTracker.MouseClick += new MouseEventHandler(WebpageClicked);
@@ -266,6 +276,7 @@ namespace PocketTarkov
 
             taskNavPanel.Controls.Add(titleTasks);
             taskNavPanel.Controls.Add(wiki);
+            taskNavPanel.Controls.Add(taskItemsImg);
             taskNavPanel.Controls.Add(taskItemTracker);
         }
 
@@ -411,12 +422,29 @@ namespace PocketTarkov
         private void ImageClicked(object sender, MouseEventArgs e)
         {
             PictureBox obj = sender as PictureBox;
-            string mapNameToOpen = obj.Name;
+            string imgToOpen = obj.Name;
 
-            Form_ShowMap map = new Form_ShowMap(this, mapNameToOpen);
+            Form_ShowMap map = new Form_ShowMap(this, imgToOpen);
             map.ShowInTaskbar = false;
             map.Show();            
         }
+
+        //private void CheckOpenWebApps()
+        //{
+        //    //Form_ShowWebpage
+        //    int count = 0;
+        //    foreach (Form f in Application.OpenForms)
+        //    {
+        //        if (f is Form_ShowWebpage)
+        //        {
+        //            count++;
+        //        }
+        //    }
+        //    if(count == 0)
+        //    {                
+        //        typeof(Form_ShowWebpage).getin
+        //    }
+        //}
 
         private void WebpageClicked(object sender, MouseEventArgs e)
         {

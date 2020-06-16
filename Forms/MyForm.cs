@@ -17,7 +17,7 @@ namespace PocketTarkov.Classes
         protected MenuStrip ms = new MenuStrip();
 
         protected ComboBox mapVersionComboBox = new ComboBox();
-        Label mapVersionComboBoxLabel = new Label();
+        protected Label mapVersionComboBoxLabel = new Label();
 
         TrackBar opacityBar = new TrackBar();
         Label opacityBarLabel = new Label();
@@ -173,7 +173,7 @@ namespace PocketTarkov.Classes
 
         private void CloseWindow(object sender, EventArgs e)
         {    
-            this.Close();
+            //this.Close();
             this.Dispose();
         }
 

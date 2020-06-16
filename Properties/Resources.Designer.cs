@@ -243,6 +243,46 @@ namespace PocketTarkov.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap questItemRequirements {
+            get {
+                object obj = ResourceManager.GetObject("questItemRequirements", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap questItems {
+            get {
+                object obj = ResourceManager.GetObject("questItems", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap questItemTracker {
+            get {
+                object obj = ResourceManager.GetObject("questItemTracker", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap quests {
+            get {
+                object obj = ResourceManager.GetObject("quests", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap reserve2d {
             get {
                 object obj = ResourceManager.GetObject("reserve2d", resourceCulture);
@@ -326,26 +366,6 @@ namespace PocketTarkov.Properties {
         internal static System.Drawing.Bitmap shorelineResort {
             get {
                 object obj = ResourceManager.GetObject("shorelineResort", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap tasks {
-            get {
-                object obj = ResourceManager.GetObject("tasks", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap taskTracker {
-            get {
-                object obj = ResourceManager.GetObject("taskTracker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

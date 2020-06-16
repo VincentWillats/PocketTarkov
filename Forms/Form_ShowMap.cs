@@ -208,13 +208,12 @@ namespace PocketTarkov
 
         private void Map_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button != MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
-                return;
-            }
-            panning = true;
-            startingPoint = new Point(e.Location.X - movingPoint.X,
-                                      e.Location.Y - movingPoint.Y);
+                panning = true;
+                startingPoint = new Point(e.Location.X - movingPoint.X,
+                                          e.Location.Y - movingPoint.Y);
+            }            
         }
 
         private void Map_MouseUp(object sender, MouseEventArgs e)
@@ -242,7 +241,7 @@ namespace PocketTarkov
             {
                 movingPoint.X = 0;
             }
-            if(movingPoint.Y < (map.Image.Height - this.Height) * -1)
+            if (movingPoint.Y < (map.Image.Height - this.Height) * -1)
             {
                 movingPoint.Y = (map.Image.Height - this.Height) * -1;
             }
@@ -250,8 +249,10 @@ namespace PocketTarkov
             {
                 movingPoint.Y = 0;
             }
+
             e.Graphics.Clear(Color.White);            
             e.Graphics.DrawImage(map.Image, movingPoint);
+            System.Diagnostics.Debug.WriteLine("Moving point = X: " + movingPoint.X.ToString() + " Y: " + movingPoint.Y.ToString());
         }
 
         private void Map_DoubleClick(object sender, MouseEventArgs e)
@@ -261,22 +262,24 @@ namespace PocketTarkov
                 if(scale != 1)
                 {
                     scale = 1;
-                    tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));
-                    map.Image = null;
-                    _orginalImage.Dispose();
-                    _orginalImage = resizeImage(orginalImage, tempSize);
-                    map.Image = _orginalImage;
                 }
                 else
                 {
-                    scale = 0.2;
-                    tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));
-                    map.Image = null;
-                    _orginalImage.Dispose();
-                    _orginalImage = resizeImage(orginalImage, tempSize);
-                    map.Image = _orginalImage;
+                    scale = 0.2;   
                 }
-            }
+                // Set zoom point to middle of the screen.
+                double xPerc = (double)(movingPoint.X * -1 + e.X) / (double)(tempSize.Width);
+                double yPerc = (double)(movingPoint.Y * -1 + e.Y) / (double)(tempSize.Height);
+                tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));
+                int newX = (int)(tempSize.Width * xPerc);
+                int newY = (int)(tempSize.Height * yPerc);
+                movingPoint = new Point(newX * -1 + (map.Width / 2), newY * -1 + (map.Height / 2));
+
+                map.Image = null;
+                _orginalImage.Dispose();
+                _orginalImage = resizeImage(orginalImage, tempSize);
+                map.Image = _orginalImage;
+            }            
         }
 
         private void Map_Zoom(object sender, MouseEventArgs e)
@@ -296,12 +299,22 @@ namespace PocketTarkov
                 {
                     scale -= 0.1;
                 }
-            } 
-            tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));           
+            }
+
+            // Set zoom point to middle of the screen.
+            double xPerc = (double)(movingPoint.X * -1 + e.X) / (double)(tempSize.Width);
+            double yPerc = (double)(movingPoint.Y * -1 + e.Y) / (double)(tempSize.Height);      
+            tempSize = new Size((int)(orginalSize.Width * scale), (int)(orginalSize.Height * scale));
+            int newX = (int)(tempSize.Width * xPerc);
+            int newY = (int)(tempSize.Height * yPerc);
+            movingPoint = new Point(newX*-1 + (map.Width / 2), newY*-1 + (map.Height / 2));
+   
             map.Image = null;
             _orginalImage.Dispose();
             _orginalImage = resizeImage(orginalImage, tempSize);
             map.Image = _orginalImage;
+
+            
         }
 
         public static Image resizeImage(Image imgToResize, Size size)

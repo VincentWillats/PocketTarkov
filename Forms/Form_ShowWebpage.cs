@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using Windows.UI.Xaml;
 
 namespace PocketTarkov
 {
@@ -29,6 +30,7 @@ namespace PocketTarkov
             LoadFormProperties();
             LoadWebBrowserObject();
             AddMenuBar(false);
+            AddWebNavigateButtons();
             LoadWebpage();     
         }
 
@@ -73,6 +75,36 @@ namespace PocketTarkov
             {
                 System.Diagnostics.Debug.WriteLine("Error connecting to webpage: " + ea.Message);
             }            
+        }
+
+        private void AddWebNavigateButtons()
+        {
+            Button backBtn = new Button();
+            Button forwardBtn = new Button();
+            ToolStripControlHost backBtnControlHost;
+            ToolStripControlHost forwardBtnControlHost;
+
+            backBtn.Text = "Back";
+            backBtn.Click += new EventHandler(BackClicked);
+            forwardBtn.Text = "Forward";
+            forwardBtn.Click += new EventHandler(ForwardClicked);
+
+
+            backBtnControlHost = new ToolStripControlHost(backBtn);
+            forwardBtnControlHost = new ToolStripControlHost(forwardBtn);           
+
+            ms.Items.Add(backBtnControlHost);
+            ms.Items.Add(forwardBtnControlHost);
+        }
+
+        private void ForwardClicked(object sender, EventArgs e)
+        {
+            webBrowser.GoForward();
+        }
+
+        private void BackClicked(object sender, EventArgs e)
+        {
+            webBrowser.GoBack();
         }
 
         private void LoadWebBrowserObject()

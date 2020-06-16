@@ -99,6 +99,7 @@ namespace PocketTarkov.Classes
             clickableCheckBoxLabel.TextAlign = ContentAlignment.MiddleRight;
             clickableCheckBox.Checked = true;
             clickableCheckBox.CheckedChanged += new EventHandler(Clickable);
+                      
 
 
             // Set Close Button 
@@ -152,6 +153,15 @@ namespace PocketTarkov.Classes
 
             ms.Items.Add(clickableCheckBoxLabelControlHost);
             ms.Items.Add(clickableCheckBoxControlHost);
+
+            if (!mapPage) // Couldn't get padding around forward/back buttons to work correctly so this is a bandage for that.
+            {
+                Label spacing = new Label();
+                spacing.Text = "                         ";
+                spacing.MouseDown += new MouseEventHandler(this.DragForm_MouseDown);
+                ToolStripControlHost spacingHost = new ToolStripControlHost(spacing);
+                ms.Items.Add(spacingHost);
+            }
 
             ms.Items.Add(closeButtonControlHost);
 

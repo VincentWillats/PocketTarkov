@@ -428,14 +428,13 @@ namespace PocketTarkov
         }
 
         private void OpenOrCloseOverlay()
-        {
-            //this.Visible = !this.Visible;
+        {            
             foreach (Form f in Application.OpenForms)
             {
                 if(f is MyForm)
                 {
                     MyForm myf = f as MyForm;
-                    if (!myf.KeepOpenBool)
+                    if (!myf.KeepOpenBool) // If not keep open ticked
                     {
                         myf.Visible = !myf.Visible;
                     }                    

@@ -121,8 +121,23 @@
   <data name="ammoTitle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\ammoTitle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="customs3d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\customs\customs3d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="customsDorms" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\customs\customsdorms.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="eftMonster" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\eftMonster.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="factory3d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\factory\factory3d.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="interchange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\interchange\interchange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="interchangeStashes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\interchange\interchangestashes.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="mapNameCustoms" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\mapNameCustoms.PNG;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -157,8 +172,32 @@
   <data name="notifyIcon32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\notifyIcon32.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="reserve2d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\reserve\reserve2d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reserve3d01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\reserve\reserve3d01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reserve3d02" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\reserve\reserve3d02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reserveUnderground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\reserve\reserveunderground.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shoreline2d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\shoreline\shoreline2d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shoreline3d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\shoreline\shoreline3d.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shorelineKeys" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\shoreline\shorelinekeys.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shorelineResort" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\shoreline\shorelineresort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tasks" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\tasks.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,7 +205,22 @@
   <data name="taskTracker" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\taskTracker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="theLab3d" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\labs\thelab3d.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="theLabBasement" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\labs\thelabbasement.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="theLabFirstFloor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\labs\thelabfirstfloor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="theLabSecondFloor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\labs\thelabsecondfloor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="wiki" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\wiki.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="woods" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\maps\woods\woods.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

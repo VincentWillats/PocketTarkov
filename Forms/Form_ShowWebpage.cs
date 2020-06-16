@@ -28,7 +28,7 @@ namespace PocketTarkov
         {
             LoadFormProperties();
             LoadWebBrowserObject();
-            AddMenuBar();
+            AddMenuBar(false);
             LoadWebpage();     
         }
 

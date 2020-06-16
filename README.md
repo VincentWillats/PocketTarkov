@@ -1,5 +1,5 @@
 # PocketTarkov 
-Last Updated on 08/06/2020
+Last Updated on 16/06/2020
 
  Overlay For Escape For Tarkov to provide easy access to game information.
  
@@ -7,7 +7,7 @@ Last Updated on 08/06/2020
  
 
 ## Download
-Current Verison 0.55 - [Link](https://github.com/VincentWillats/PocketTarkov/releases/tag/0.55)
+Current Verison 0.60 - [Link](https://github.com/VincentWillats/PocketTarkov/releases/download/0.60/PocketTarkov0.60.zip)
 
 
 ## Features
@@ -28,7 +28,6 @@ Current Verison 0.55 - [Link](https://github.com/VincentWillats/PocketTarkov/rel
 6. (Optional) Add your google sheet URL to the settings.
 
 ## Future Plans
-- Add scroll zoom on maps.
 - Built in quest and item tracker.
 
 ## How It Works
@@ -36,6 +35,17 @@ This application simply sits over the top of Escape From Tarkov and displays web
 It pulls the tarkov window position and size from the windows API and does not interact with the cilent at all.
 
 ## Update Log
+- 16/06/2020 0.60 
+  * Added labs map.
+  * Added multiple version of maps, including inside resort/dorms maps.
+  * Updated map zooming, can now scroll to zoom and it will center where you zoom.
+  * Moved the maps into the app itself to save bandwidth.
+  * Added quest item list image.
+  * Added forward and back navigation buttons for web views.
+  * Moved window options into custom title bar to save space.
+  * Added borders to navigation panels to show groupings more clearly.
+  * Moved settings button.
+                    
 - 09/06/2020 0.55 - Added window opacity slider, keep open toggle and interactable toggle.
 - 08/06/2020 0.51 - Minor bug fix.
 - 08/06/2020 0.50 - Initial Upload.
@@ -46,3 +56,4 @@ I am a new software developer, current learning everyday, making new projects an
 
 ### Disclaimer
 I do not own the rights to any of the Tarkov Maps used or Websites and they do not fall under the License of this project.
+Attribution to the creators of the maps are within the map images. And a massive thanks to all the creators.

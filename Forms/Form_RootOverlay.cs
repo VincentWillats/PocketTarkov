@@ -29,6 +29,34 @@ namespace PocketTarkov
         bool clickableFirstHotkeyPressed;
         bool clickableSecondHotkeyPressed;
 
+        private TarkovItemClass _selectedItem;
+        public TarkovItemClass selectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
+                UpdateItemDetails();
+            }
+        }
+
+        Label itemMarketPrice = new Label();
+        Label itemMarketPriceAvg24h = new Label();
+        Label itemMarketPricePerSlot = new Label();
+        Label itemTraderBest= new Label();
+        Label itemTraderPrice = new Label();
+        Label itemTraderPricePerSlot = new Label();
+        Label itemLastUpdated = new Label();
+
+        public Label itemMarketPriceVar = new Label();
+        public Label itemMarketPriceAvg24hVar = new Label();
+        public Label itemMarketPricePerSlotVar = new Label();
+        public Label itemTraderBestVar= new Label();
+        public Label itemTraderPriceVar= new Label();
+        public Label itemTraderPricePerSlotVar = new Label();
+        public Label itemLastUpdatedVar = new Label();
+
+        public PictureBox itemImg = new PictureBox();
 
         private NotifyIcon notifyIcon;
         private ContextMenuStrip contextMenuStrip;
@@ -40,6 +68,7 @@ namespace PocketTarkov
 
         private Form_Nav navForm = new Form_Nav();
 
+        private Panel itemSearch = new Panel();
         private Panel mapNavPanel = new Panel();
         private Panel ballisticsNavPanel = new Panel();
         private Panel taskNavPanel = new Panel();
@@ -77,7 +106,7 @@ namespace PocketTarkov
             SetRootOverlayProperties();
             SetupNotifyIcon();
             InitNavForm();
-            OpenOrCloseOverlay();
+            OpenOrCloseOverlay();            
         }  
 
         private void SetKeyboardHookEvents()
@@ -162,7 +191,7 @@ namespace PocketTarkov
             }
         }
 
-        private void InitNavForm()
+        private async void InitNavForm()
         {
             navForm.ShowInTaskbar = false;
             navForm.TopLevel = true;
@@ -175,20 +204,45 @@ namespace PocketTarkov
             navForm.Top = this.Top;
             navForm.Left = this.Left;
 
+            await AddItemSearchPanel();
             AddMapPanel();
             AddBallisticsPanel();
             AddTaskPanel();
             AddSettingsButton();
 
             navForm.Show();            
-        }         
-        
+        }
+
+        private void UpdateItemDetails()
+        {
+            itemMarketPriceVar.Text        = "- " + selectedItem.price.ToString("N0") + " ₽";
+            itemMarketPriceAvg24hVar.Text   = "- " + selectedItem.avg24hPrice.ToString("N0") + " ₽";
+            itemMarketPricePerSlotVar.Text  = "- " + (selectedItem.price / selectedItem.slots).ToString("N0") + " ₽";
+            itemTraderBestVar.Text        = "- " + selectedItem.traderName;
+            itemTraderPriceVar.Text        = "- " + selectedItem.traderPrice.ToString("N0") + " " + selectedItem.traderPriceCur;
+            itemTraderPricePerSlotVar.Text = "- " + (selectedItem.traderPrice / selectedItem.slots).ToString("N0") + " " + selectedItem.traderPriceCur;
+            itemLastUpdatedVar.Text        = "- " + selectedItem.updated.ToShortDateString();
+            itemImg.Load(selectedItem.img);
+        }
+
+        private async Task AddItemSearchPanel()
+        {            
+            itemSearch.AutoSize = true;            
+            itemSearch.Location = new Point(navForm.ClientSize.Width / 2 - mapNavPanel.Size.Width / 2,
+                                                0 + 100);
+           
+            itemSearch.BorderStyle = BorderStyle.FixedSingle;
+
+            navForm.Controls.Add(itemSearch);
+            await AddItemPanelObjectsAsync();
+        }
+
         private void AddMapPanel()
         {            
             mapNavPanel.BackColor = Color.Transparent;           
             mapNavPanel.AutoSize = true;            
-            mapNavPanel.Location = new Point(navForm.ClientSize.Width / 2 - mapNavPanel.Size.Width / 2,
-                                                navForm.ClientSize.Height / 4 - mapNavPanel.Size.Height / 2);
+            mapNavPanel.Top = itemSearch.Bottom + 50;
+            mapNavPanel.Left = itemSearch.Left;
             mapNavPanel.BorderStyle = BorderStyle.FixedSingle;    
             
             navForm.Controls.Add(mapNavPanel);
@@ -233,6 +287,173 @@ namespace PocketTarkov
             settingsImg.BackColor = Color.Transparent;
 
             navForm.Controls.Add(settingsImg);
+        }
+
+        private async Task AddItemPanelObjectsAsync()
+        {
+            ComboBox itemSearchBox = new ComboBox();
+            PictureBox itemTitle = new PictureBox();            
+
+            itemMarketPricePerSlot.Text  = "Market Price Per Slot ";
+            itemMarketPrice.Text        = "Market Price ";
+            itemMarketPriceAvg24h.Text   = "Market Average 24h ";
+            itemTraderBest.Text        = "Best Trader ";
+            itemTraderPrice.Text        = "Trader Price ";
+            itemTraderPricePerSlot.Text = "Trader Price Per Slot ";
+            itemLastUpdated.Text        = "Last Updated ";
+           
+            itemMarketPricePerSlot.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemMarketPrice.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemMarketPriceAvg24h.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemTraderBest.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemTraderPrice.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemTraderPricePerSlot.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemLastUpdated.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+
+            itemMarketPricePerSlotVar.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemMarketPriceVar.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemMarketPriceAvg24hVar.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemTraderBestVar.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemTraderPriceVar.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemTraderPricePerSlotVar.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+            itemLastUpdatedVar.Font = new Font(itemTraderPricePerSlot.Font.FontFamily, 10);
+
+            itemMarketPrice.AutoSize = true;
+            itemMarketPriceAvg24h.AutoSize = true;
+            itemMarketPricePerSlot.AutoSize = true;
+            itemTraderBest.AutoSize = true;
+            itemTraderPrice.AutoSize = true;
+            itemTraderPricePerSlot.AutoSize = true;
+            itemLastUpdated.AutoSize = true;
+
+
+            if (TarkovItemController.allItemsNames.Count <= 0) // If items not loaded, load items.
+            {
+                await TarkovItemController.GetAllItemNamesListAsync();
+            }               
+
+            var source = new AutoCompleteStringCollection();
+            foreach (TarkovItemClass item in TarkovItemController.allItemsNames)
+            {
+                source.Add(item.name);
+                itemSearchBox.Items.Add(item.name);
+            }            
+
+            itemTitle.Image = Properties.Resources.mapsTitle;
+            itemTitle.Refresh();
+            itemTitle.SizeMode = PictureBoxSizeMode.AutoSize;
+            itemTitle.Padding = new Padding(10, 10, 0, 0);
+            itemTitle.BackColor = Color.Transparent;            
+
+            itemSearchBox.Top = itemTitle.Bottom + 37;
+            itemSearchBox.Left = 10;
+            itemSearchBox.Width = 200;            
+            itemSearchBox.AutoCompleteCustomSource = source;
+            itemSearchBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            itemSearchBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            itemSearchBox.SelectedIndexChanged += new EventHandler(ItemSelected);
+
+            itemImg.BorderStyle = BorderStyle.FixedSingle;
+            itemImg.Size = new Size(50, 50);
+            itemImg.Top = itemTitle.Bottom + 25;
+            itemImg.Left = itemSearchBox.Right + 10;
+            itemImg.SizeMode = PictureBoxSizeMode.StretchImage;
+            itemImg.BackColor = Color.Transparent;
+
+            itemMarketPrice.Top = itemImg.Bottom + 2;
+            itemMarketPrice.Padding = new Padding(10, 0, 0, 0);
+            itemMarketPrice.BackColor = Color.Transparent;
+            itemMarketPrice.ForeColor = Color.White;            
+            
+
+            itemMarketPriceAvg24h.Top = itemMarketPrice.Bottom + 2;
+            itemMarketPriceAvg24h.Padding = new Padding(10, 0, 0, 0);
+            itemMarketPriceAvg24h.BackColor = Color.Transparent;
+            itemMarketPriceAvg24h.ForeColor = Color.White;
+            
+
+            itemMarketPricePerSlot.Top = itemMarketPriceAvg24h.Bottom + 2;
+            itemMarketPricePerSlot.Padding = new Padding(10, 0, 0, 0);
+            itemMarketPricePerSlot.BackColor = Color.Transparent;
+            itemMarketPricePerSlot.ForeColor = Color.White;
+
+            itemTraderBest.Top = itemMarketPricePerSlot.Bottom + 2;
+            itemTraderBest.Padding = new Padding(10, 0, 0, 0);
+            itemTraderBest.BackColor = Color.Transparent;
+            itemTraderBest.ForeColor = Color.White;
+
+            itemTraderPrice.Top = itemTraderBest.Bottom + 2;
+            itemTraderPrice.Padding = new Padding(10, 0, 0, 0);
+            itemTraderPrice.BackColor = Color.Transparent;
+            itemTraderPrice.ForeColor = Color.White;
+            
+
+            itemTraderPricePerSlot.Top = itemTraderPrice.Bottom + 2;
+            itemTraderPricePerSlot.Padding = new Padding(10, 0, 0, 0);
+            itemTraderPricePerSlot.BackColor = Color.Transparent;
+            itemTraderPricePerSlot.ForeColor = Color.White;
+            
+
+            itemLastUpdated.Top = itemTraderPricePerSlot.Bottom + 2;
+            itemLastUpdated.Padding = new Padding(10, 0, 0, 10);
+            itemLastUpdated.BackColor = Color.Transparent;
+            itemLastUpdated.ForeColor = Color.White;            
+
+            itemSearch.Controls.Add(itemTitle);
+            itemSearch.Controls.Add(itemImg);
+            itemSearch.Controls.Add(itemSearchBox);
+            itemSearch.Controls.Add(itemMarketPrice);
+            itemSearch.Controls.Add(itemMarketPriceAvg24h);
+            itemSearch.Controls.Add(itemMarketPricePerSlot);
+            itemSearch.Controls.Add(itemTraderBest);
+            itemSearch.Controls.Add(itemTraderPrice);
+            itemSearch.Controls.Add(itemTraderPricePerSlot);
+            itemSearch.Controls.Add(itemLastUpdated);
+
+            itemTraderPricePerSlotVar.Left = itemMarketPricePerSlot.Right + 5;
+            itemTraderPricePerSlotVar.Top = itemTraderPricePerSlot.Top;
+            itemTraderPricePerSlotVar.ForeColor = Color.White;
+
+            itemLastUpdatedVar.Left = itemMarketPricePerSlot.Right + 5;
+            itemLastUpdatedVar.Top = itemLastUpdated.Top;
+            itemLastUpdatedVar.ForeColor = Color.White;
+
+            itemTraderBestVar.Left = itemMarketPricePerSlot.Right + 5;
+            itemTraderBestVar.Top = itemTraderBest.Top;
+            itemTraderBestVar.ForeColor = Color.White;
+
+            itemTraderPriceVar.Left = itemMarketPricePerSlot.Right + 5;
+            itemTraderPriceVar.Top = itemTraderPrice.Top;
+            itemTraderPriceVar.ForeColor = Color.White;
+
+            itemMarketPricePerSlotVar.Left = itemMarketPricePerSlot.Right + 5;
+            itemMarketPricePerSlotVar.Top = itemMarketPricePerSlot.Top;
+            itemMarketPricePerSlotVar.ForeColor = Color.White;
+
+            itemMarketPriceAvg24hVar.Left = itemMarketPricePerSlot.Right + 5;
+            itemMarketPriceAvg24hVar.Top = itemMarketPriceAvg24h.Top;
+            itemMarketPriceAvg24hVar.ForeColor = Color.White;
+
+            itemMarketPriceVar.Left = itemMarketPricePerSlot.Right + 5;
+            itemMarketPriceVar.Top = itemMarketPrice.Top;
+            itemMarketPriceVar.ForeColor = Color.White;
+
+            itemSearch.Controls.Add(itemMarketPriceVar);
+            itemSearch.Controls.Add(itemMarketPriceAvg24hVar);
+            itemSearch.Controls.Add(itemMarketPricePerSlotVar);
+            itemSearch.Controls.Add(itemTraderBestVar);
+            itemSearch.Controls.Add(itemTraderPriceVar);
+            itemSearch.Controls.Add(itemTraderPricePerSlotVar);
+            itemSearch.Controls.Add(itemLastUpdatedVar);
+
+        }
+
+        private async void ItemSelected(object sender, EventArgs e)
+        {
+            ComboBox cmb = sender as ComboBox;
+            string itemName = cmb.SelectedItem.ToString();
+
+            selectedItem = await TarkovItemController.GetItemDetails(itemName);
         }
 
         private void AddTaskPanelButtons()
@@ -428,23 +649,6 @@ namespace PocketTarkov
             map.ShowInTaskbar = false;
             map.Show();            
         }
-
-        //private void CheckOpenWebApps()
-        //{
-        //    //Form_ShowWebpage
-        //    int count = 0;
-        //    foreach (Form f in Application.OpenForms)
-        //    {
-        //        if (f is Form_ShowWebpage)
-        //        {
-        //            count++;
-        //        }
-        //    }
-        //    if(count == 0)
-        //    {                
-        //        typeof(Form_ShowWebpage).getin
-        //    }
-        //}
 
         private void WebpageClicked(object sender, MouseEventArgs e)
         {

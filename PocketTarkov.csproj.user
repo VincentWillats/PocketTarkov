@@ -8,9 +8,6 @@
     <Compile Update="Classes\DragControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="Forms\MyForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Forms\Form_Nav.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -24,6 +21,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Form_ShowWebpage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\MyForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

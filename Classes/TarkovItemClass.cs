@@ -5,7 +5,11 @@ using System.Text;
 namespace PocketTarkov
 {
     public class TarkovItemClass
-    {           
+    {
+        public override string ToString()
+        {
+            return name;
+        }
         public string uid { get; set; }
         public string bsgId { get; set; }
         public string name { get; set; }

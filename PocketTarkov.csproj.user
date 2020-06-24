@@ -5,6 +5,9 @@
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Classes\CustomLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Classes\DragControl.cs">
       <SubType>Component</SubType>
     </Compile>

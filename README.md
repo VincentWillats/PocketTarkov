@@ -1,19 +1,22 @@
 # PocketTarkov 
-Last Updated on 16/06/2020
+Last Updated on 24/06/2020
 
  Overlay For Escape For Tarkov to provide easy access to game information.
  
- ![image](https://i.imgur.com/Yq6wfog.png)
+ ![image](https://i.imgur.com/AxfisyE.jpg)
+ ![image](https://i.imgur.com/kqFrMHa.jpg)
+ ![image](https://i.imgur.com/X9XNd5k.jpg)
  
 
 ## Download
-Current Verison 0.60 - [Link](https://github.com/VincentWillats/PocketTarkov/releases/download/0.60/PocketTarkov0.60.zip)
+Current Verison 0.80 - [Link](https://github.com/VincentWillats/PocketTarkov/releases/download/0.80/PocketTarkov0.80.zip)
 
 
 ## Features
 - Display Maps
 - Display Ammo Ballistics
 - Display Tasks
+- Ability to search for items prices
 - Ability to keep windows ontop
 - Ability to change window transparency 
 - Ability to make windows click throughable
@@ -33,8 +36,14 @@ Current Verison 0.60 - [Link](https://github.com/VincentWillats/PocketTarkov/rel
 ## How It Works
 This application simply sits over the top of Escape From Tarkov and displays web links for your convience.
 It pulls the tarkov window position and size from the windows API and does not interact with the cilent at all.
+The market prices are pulled using https://tarkov-market.com/ API, so special thanks to Tarkov Market!
 
 ## Update Log
+- 24/06/2020 0.80 
+  * Added item search function with item market prices.
+  * Move GUI around.
+  
+  
 - 16/06/2020 0.60 
   * Added labs map.
   * Added multiple version of maps, including inside resort/dorms maps.
@@ -56,4 +65,4 @@ I am a new software developer, current learning everyday, making new projects an
 
 ### Disclaimer
 I do not own the rights to any of the Tarkov Maps used or Websites and they do not fall under the License of this project.
-Attribution to the creators of the maps are within the map images. And a massive thanks to all the creators.
+Attribution to the creators of the maps are within the map images. And a massive thanks to all the creators, wiki admins, tarkov market and everyone else in the tarkov community.

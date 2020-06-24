@@ -10,16 +10,17 @@ namespace PocketTarkov
     public class TarkovItemController
     {
         static HttpClient httpclient = new HttpClient();
-        static string tarkovMarket = "https://tarkov-market.com";
+        static string apiString = "https://pockettarkovapi-managementservice.azure-api.net/PocketTarkovAPI/";
 
         public static List<TarkovItemClass> allItemsNames = new List<TarkovItemClass>();
         public static List<TarkovItemClass> matchingItems = new List<TarkovItemClass>();
 
         static TarkovItemController()
         {
-            httpclient.BaseAddress = new Uri(tarkovMarket);
-            httpclient.DefaultRequestHeaders.Accept.Clear();
-            httpclient.DefaultRequestHeaders.Add("x-api-key", KeysAPI.tarkovMarketAPI);
+            httpclient.BaseAddress = new Uri(apiString);
+            httpclient.DefaultRequestHeaders.Accept.Clear();    
+
+            httpclient.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", KeysAPI.OcpApimSubscriptionKey);
         }
 
         public static List<TarkovItemClass> GetMatchingItems(string searchTerm)
@@ -40,9 +41,9 @@ namespace PocketTarkov
             try
             {       
                 // Get the response.
-                HttpResponseMessage response = await httpclient.GetAsync("/api/v1/items/all");
+                HttpResponseMessage response = await httpclient.GetAsync("GetAllItemData");
                 response.EnsureSuccessStatusCode();
-
+                
                 string responseContent = await response.Content.ReadAsStringAsync();
                 allItemsNames = JsonConvert.DeserializeObject<List<TarkovItemClass>>(responseContent);
                 System.Diagnostics.Debug.WriteLine("Items pulled successfully.");
@@ -52,24 +53,5 @@ namespace PocketTarkov
                 System.Diagnostics.Debug.WriteLine("Error pulling items: " + ea.Message);
             }
         }
-
-        //public static async Task<TarkovItemClass> GetItemDetails(string itemID)
-        //{
-        //    TarkovItemClass item = new TarkovItemClass();
-        //    try
-        //    {               
-        //        // Get the response.
-        //        HttpResponseMessage response = await httpclient.GetAsync("/api/v1/item?uid=" + itemID);
-        //        response.EnsureSuccessStatusCode();
-
-        //        string responseContent = await response.Content.ReadAsStringAsync();
-        //        item = JsonConvert.DeserializeObject<List<TarkovItemClass>>(responseContent)[0];
-        //    }
-        //    catch (Exception ea)
-        //    {
-        //        System.Diagnostics.Debug.WriteLine("Error: " + ea.Message);
-        //    }
-        //    return item;
-        //}
     }
 }

@@ -9,7 +9,7 @@ Last Updated on 24/06/2020
  
 
 ## Download
-Current Verison 0.80 - [Link](https://github.com/VincentWillats/PocketTarkov/releases/download/0.80/PocketTarkov0.80.zip)
+Current Verison 0.85 - [Link](https://github.com/VincentWillats/PocketTarkov/releases/download/0.85/PocketTarkov0.85.zip)
 
 
 ## Features
@@ -39,11 +39,11 @@ It pulls the tarkov window position and size from the windows API and does not i
 The market prices are pulled using https://tarkov-market.com/ API, so special thanks to Tarkov Market!
 
 ## Update Log
+- 24/06/2020 0.85 
+  * Security update.
 - 24/06/2020 0.80 
   * Added item search function with item market prices.
-  * Move GUI around.
-  
-  
+  * Move GUI around. 
 - 16/06/2020 0.60 
   * Added labs map.
   * Added multiple version of maps, including inside resort/dorms maps.

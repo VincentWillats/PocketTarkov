@@ -49,37 +49,36 @@ namespace PocketTarkov
         CustomLabel itemTraderPrice = new CustomLabel();
         CustomLabel itemTraderPricePerSlot = new CustomLabel();
         CustomLabel itemLastUpdated = new CustomLabel();
-
-        public CustomLabel itemMarketPriceVar = new CustomLabel();
-        public CustomLabel itemMarketPriceAvg24hVar = new CustomLabel();
-        public CustomLabel itemMarketPricePerSlotVar = new CustomLabel();
-        public CustomLabel itemTraderBestVar= new CustomLabel();
-        public CustomLabel itemTraderPriceVar= new CustomLabel();
-        public CustomLabel itemTraderPricePerSlotVar = new CustomLabel();
-        public CustomLabel itemLastUpdatedVar = new CustomLabel();
-
         ComboBox itemSearchBox = new ComboBox();
 
-        public PictureBox itemImg = new PictureBox();
+        CustomLabel itemMarketPriceVar = new CustomLabel();
+        CustomLabel itemMarketPriceAvg24hVar = new CustomLabel();
+        CustomLabel itemMarketPricePerSlotVar = new CustomLabel();
+        CustomLabel itemTraderBestVar= new CustomLabel();
+        CustomLabel itemTraderPriceVar= new CustomLabel();
+        CustomLabel itemTraderPricePerSlotVar = new CustomLabel();
+        CustomLabel itemLastUpdatedVar = new CustomLabel();       
 
-        private NotifyIcon notifyIcon;
-        private ContextMenuStrip contextMenuStrip;
-        private ToolStripMenuItem settingsItem;
-        private ToolStripMenuItem exitItem;
-        private ToolStripMenuItem hideOrShowItem;
+        PictureBox itemImg = new PictureBox();
 
-        private LowLevelKeyboardHook kbh;
+        NotifyIcon notifyIcon;
+        ContextMenuStrip contextMenuStrip;
+        ToolStripMenuItem settingsItem;
+        ToolStripMenuItem exitItem;
+        ToolStripMenuItem hideOrShowItem;
 
-        private Form_Nav navForm = new Form_Nav();
+        LowLevelKeyboardHook kbh;
 
-        private Panel itemSearch = new Panel();
-        private Panel mapNavPanel = new Panel();
-        private Panel ballisticsNavPanel = new Panel();
-        private Panel taskNavPanel = new Panel();
+        Form_Nav navForm = new Form_Nav();
 
-        private RECT rect;
+        Panel itemSearch = new Panel();
+        Panel mapNavPanel = new Panel();
+        Panel ballisticsNavPanel = new Panel();
+        Panel taskNavPanel = new Panel();
 
-        private IntPtr handle = FindWindow(null, TARKOV_WINDOW_NAME);  
+        RECT rect;
+
+        IntPtr handle = FindWindow(null, TARKOV_WINDOW_NAME);  
 
         // DLL Hooks
         #region DLL Hooks
@@ -172,28 +171,7 @@ namespace PocketTarkov
             notifyIcon.ContextMenuStrip = contextMenuStrip;
 
             notifyIcon.DoubleClick += new EventHandler(NotifyIconDoubleClick);
-        }
-
-        private void NotifyIconClicked(object sender, EventArgs e)
-        {
-            ToolStripMenuItem item = sender as ToolStripMenuItem;
-            string whatClicked = item.Name;
-
-            switch (whatClicked)
-            {
-                case "settings":
-                    RootUnHookKeyboard();
-                    Form_Settings settings = new Form_Settings(this);
-                    settings.Show();
-                    break;
-                case "exit":
-                    this.Close();
-                    break;
-                case "openClose":
-                    OpenOrCloseOverlay();
-                    break;
-            }
-        }
+        }      
 
         private async void InitNavForm()
         {
@@ -217,24 +195,17 @@ namespace PocketTarkov
             navForm.Show();            
         }
 
-        private void UpdateItemDetails()
-        {
-            itemMarketPriceVar.Text        = "- " + selectedItem.price.ToString("N0") + " ₽";
-            itemMarketPriceAvg24hVar.Text   = "- " + selectedItem.avg24hPrice.ToString("N0") + " ₽";
-            itemMarketPricePerSlotVar.Text  = "- " + (selectedItem.price / selectedItem.slots).ToString("N0") + " ₽";
-            itemTraderBestVar.Text        = "- " + selectedItem.traderName;
-            itemTraderPriceVar.Text        = "- " + selectedItem.traderPrice.ToString("N0") + " " + selectedItem.traderPriceCur;
-            itemTraderPricePerSlotVar.Text = "- " + (selectedItem.traderPrice / selectedItem.slots).ToString("N0") + " " + selectedItem.traderPriceCur;
-            itemLastUpdatedVar.Text        = "- " + selectedItem.updated.ToShortDateString();
-            itemImg.Load(selectedItem.img);
-        }
+        
+
+        // Set up panels
+        #region Panels
 
         private async Task AddItemSearchPanel()
         {
-            itemSearch.AutoSize = true;            
+            itemSearch.AutoSize = true;
             itemSearch.Location = new Point(navForm.ClientSize.Width / 4 - mapNavPanel.Size.Width / 2,
                                                 0 + 100);
-            
+
             itemSearch.BorderStyle = BorderStyle.FixedSingle;
 
             navForm.Controls.Add(itemSearch);
@@ -293,6 +264,10 @@ namespace PocketTarkov
             navForm.Controls.Add(settingsImg);
         }
 
+        #endregion
+
+        // Set up panel contents
+        #region Panel contents
         private async Task AddItemPanelObjectsAsync()
         {
             
@@ -451,85 +426,6 @@ namespace PocketTarkov
             itemSearch.Controls.Add(itemTraderPriceVar);
             itemSearch.Controls.Add(itemTraderPricePerSlotVar);
             itemSearch.Controls.Add(itemLastUpdatedVar);
-        }
-
-        private void itemSearchEntered(object sender, EventArgs e)
-        {
-           
-            textChangeEventOn = true;
-           
-        }
-
-        private void ComboKeyPress(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
-            {                
-                textChangeEventOn = false;
-            }
-            if(e.KeyCode == Keys.Back)
-            {                                    
-                textChangeEventOn = true;                
-            }  
-            if(itemSearchBox.Text.Length <= 1)
-            {
-                textChangeEventOn = true;
-            }
-        }
-
-        private void SearchItemList(object sender, EventArgs e)
-        {
-            if (!textChangeEventOn) { return; }
-            if (itemSearchBox.Text.Length < 2)
-            {
-                return;
-            }            
-            
-            textChangeEventOn = false;
-            itemSearchBox.SelectedIndexChanged -= new EventHandler(ItemSelected);
-
-            var txt = itemSearchBox.Text;
-            var list = TarkovItemController.GetMatchingItems(itemSearchBox.Text);
-            var listCount = list.Count();
-            if(listCount < 30)
-            {
-                itemSearchBox.DroppedDown = false;
-            }
-            if (listCount == 1)
-            {                
-                itemSearchBox.DataSource = list.ToList();
-                itemSearchBox.DroppedDown = true;
-                Cursor.Current = Cursors.Default;
-                itemSearchBox.SelectedIndex = 0;
-                selectedItem = itemSearchBox.SelectedItem as TarkovItemClass;                               
-            }
-            else if (listCount > 1)
-            {                
-                itemSearchBox.DataSource = list.ToList();
-                itemSearchBox.DroppedDown = true;
-                Cursor.Current = Cursors.Default;
-                itemSearchBox.Text = txt;
-                itemSearchBox.SelectionStart = txt.Length;                
-            }
-            
-            else
-            {
-                itemSearchBox.DroppedDown = false;
-                itemSearchBox.SelectionStart = txt.Length;
-            }            
-            textChangeEventOn = true;
-            itemSearchBox.SelectedIndexChanged += new EventHandler(ItemSelected);
-        }
-
-        private void ItemSelected(object sender, EventArgs e)
-        {            
-            try
-            {            
-                selectedItem = itemSearchBox.SelectedItem as TarkovItemClass;
-            }
-            catch (Exception ea)
-            {
-                System.Diagnostics.Debug.WriteLine("Error displaying item details: " + ea.Message);
-            }            
         }
 
         private void AddTaskPanelButtons()
@@ -711,6 +607,111 @@ namespace PocketTarkov
             mapNavPanel.Controls.Add(labsMap);
         }
 
+        #endregion
+
+        // Events
+        #region Events  
+
+        private void NotifyIconClicked(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            string whatClicked = item.Name;
+
+            switch (whatClicked)
+            {
+                case "settings":
+                    RootUnHookKeyboard();
+                    Form_Settings settings = new Form_Settings(this);
+                    settings.Show();
+                    break;
+                case "exit":
+                    this.Close();
+                    break;
+                case "openClose":
+                    OpenOrCloseOverlay();
+                    break;
+            }
+        }
+
+        private void itemSearchEntered(object sender, EventArgs e)
+        {
+
+            textChangeEventOn = true;
+
+        }
+
+        private void ComboKeyPress(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
+            {
+                textChangeEventOn = false;
+            }
+            if (e.KeyCode == Keys.Back)
+            {
+                textChangeEventOn = true;
+            }
+            if (itemSearchBox.Text.Length <= 1)
+            {
+                textChangeEventOn = true;
+            }
+        }
+
+        private void SearchItemList(object sender, EventArgs e)
+        {
+            if (!textChangeEventOn) { return; }
+            if (itemSearchBox.Text.Length < 2)
+            {
+                return;
+            }
+
+            textChangeEventOn = false;
+            itemSearchBox.SelectedIndexChanged -= new EventHandler(ItemSelected);
+
+            var txt = itemSearchBox.Text;
+            var list = TarkovItemController.GetMatchingItems(itemSearchBox.Text);
+            var listCount = list.Count();
+            if (listCount < 30)
+            {
+                itemSearchBox.DroppedDown = false;
+            }
+            if (listCount == 1)
+            {
+                itemSearchBox.DataSource = list.ToList();
+                itemSearchBox.DroppedDown = true;
+                Cursor.Current = Cursors.Default;
+                itemSearchBox.SelectedIndex = 0;
+                selectedItem = itemSearchBox.SelectedItem as TarkovItemClass;
+            }
+            else if (listCount > 1)
+            {
+                itemSearchBox.DataSource = list.ToList();
+                itemSearchBox.DroppedDown = true;
+                Cursor.Current = Cursors.Default;
+                itemSearchBox.Text = txt;
+                itemSearchBox.SelectionStart = txt.Length;
+            }
+
+            else
+            {
+                itemSearchBox.DroppedDown = false;
+                itemSearchBox.SelectionStart = txt.Length;
+            }
+            textChangeEventOn = true;
+            itemSearchBox.SelectedIndexChanged += new EventHandler(ItemSelected);
+        }
+
+        private void ItemSelected(object sender, EventArgs e)
+        {
+            try
+            {
+                selectedItem = itemSearchBox.SelectedItem as TarkovItemClass;
+            }
+            catch (Exception ea)
+            {
+                System.Diagnostics.Debug.WriteLine("Error displaying item details: " + ea.Message);
+            }
+        }
+
         private void NotifyIconDoubleClick(object Sender, EventArgs e)
         {
             OpenOrCloseOverlay();
@@ -743,30 +744,17 @@ namespace PocketTarkov
             settings.Show();
         }
 
-        private void OpenOrCloseOverlay()
-        {            
-            foreach (Form f in Application.OpenForms)
-            {
-                if(f is MyForm)
-                {
-                    MyForm myf = f as MyForm;
-                    if (!myf.KeepOpenBool) // If not keep open ticked
-                    {
-                        myf.Visible = !myf.Visible;
-                    }                    
-                }
-                else
-                {
-                    f.Visible = !f.Visible;
-                }                
-            }         
+        private void Form_RootOverlay_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveSettings();
         }
 
+        #endregion      
 
         // Hotkeys
         #region Hotkeys        
 
-        void kbh_OnKeyPressed(object sender, Keys e)
+        private void kbh_OnKeyPressed(object sender, Keys e)
         {
             if (e == settings.hotkey01)// && e == Keys.V)
             {               
@@ -787,7 +775,7 @@ namespace PocketTarkov
             CheckKeyCombo();
         }
 
-        void kbh_OnKeyUnpressed(object sender, Keys e)
+        private void kbh_OnKeyUnpressed(object sender, Keys e)
         {
             if (e == settings.hotkey01)// && e == Keys.V)
             {
@@ -807,7 +795,7 @@ namespace PocketTarkov
             }
         }
 
-        void CheckKeyCombo()
+        private void CheckKeyCombo()
         {
             if (openCloseFirstHotkeyPressed && openCloseSecondHotkeyPressed)
             {
@@ -851,16 +839,8 @@ namespace PocketTarkov
 
         #endregion
 
-
-        public struct RECT
-        {
-            public int left, top, right, bottom;
-        }
-
-        private void Form_RootOverlay_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SaveSettings();
-        }
+        // Saving
+        #region Saving  
 
         private void SaveSettings()
         {
@@ -910,6 +890,43 @@ namespace PocketTarkov
                 settings.hotkey04 = Keys.M;
                 settings.googleDocURL = "";
             }
+        }
+        #endregion
+
+        private void UpdateItemDetails()
+        {
+            itemMarketPriceVar.Text = "- " + selectedItem.price.ToString("N0") + " ₽";
+            itemMarketPriceAvg24hVar.Text = "- " + selectedItem.avg24hPrice.ToString("N0") + " ₽";
+            itemMarketPricePerSlotVar.Text = "- " + (selectedItem.price / selectedItem.slots).ToString("N0") + " ₽";
+            itemTraderBestVar.Text = "- " + selectedItem.traderName;
+            itemTraderPriceVar.Text = "- " + selectedItem.traderPrice.ToString("N0") + " " + selectedItem.traderPriceCur;
+            itemTraderPricePerSlotVar.Text = "- " + (selectedItem.traderPrice / selectedItem.slots).ToString("N0") + " " + selectedItem.traderPriceCur;
+            itemLastUpdatedVar.Text = "- " + selectedItem.updated.ToShortDateString();
+            itemImg.Load(selectedItem.img);
+        }
+
+        private void OpenOrCloseOverlay()
+        {
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is MyForm)
+                {
+                    MyForm myf = f as MyForm;
+                    if (!myf.KeepOpenBool) // If not keep open ticked
+                    {
+                        myf.Visible = !myf.Visible;
+                    }
+                }
+                else
+                {
+                    f.Visible = !f.Visible;
+                }
+            }
+        }
+
+        public struct RECT
+        {
+            public int left, top, right, bottom;
         }
     }
 }

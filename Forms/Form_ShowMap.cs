@@ -84,7 +84,7 @@ namespace PocketTarkov
                     mapVersionComboBox.Items.Add("Factory");
                     break;
                 case "customsMap":
-                    mapVersionComboBox.Items.Add("Customs 3D");
+                    mapVersionComboBox.Items.Add("Customs 2D");
                     mapVersionComboBox.Items.Add("Customs Dorms");                    
                     break;
                 case "labsMap":
@@ -144,8 +144,8 @@ namespace PocketTarkov
                 case "Factory":
                     orginalImage = Properties.Resources.factory3d;
                     break;
-                case "Customs 3D":
-                    orginalImage = Properties.Resources.customs3d;
+                case "Customs 2D":
+                    orginalImage = Properties.Resources.customs2d;
                     break;
                 case "Customs Dorms":
                     orginalImage = Properties.Resources.customsDorms;

@@ -73,9 +73,9 @@ namespace PocketTarkov.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap customs3d {
+        internal static System.Drawing.Bitmap customs2d {
             get {
-                object obj = ResourceManager.GetObject("customs3d", resourceCulture);
+                object obj = ResourceManager.GetObject("customs2d", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -326,6 +326,16 @@ namespace PocketTarkov.Properties {
         internal static System.Drawing.Bitmap reserveUnderground {
             get {
                 object obj = ResourceManager.GetObject("reserveUnderground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap reserveUnderground1 {
+            get {
+                object obj = ResourceManager.GetObject("reserveUnderground1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

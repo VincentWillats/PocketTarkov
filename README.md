@@ -1,5 +1,5 @@
 # PocketTarkov 
-Last Updated on 24/06/2020
+Last Updated on 29/08/2020
 
  Overlay For Escape For Tarkov to provide easy access to game information.
  
@@ -9,7 +9,7 @@ Last Updated on 24/06/2020
  
 
 ## Download
-Current Verison 0.85 - [Link](https://github.com/VincentWillats/PocketTarkov/releases/download/0.85/PocketTarkov0.85.zip)
+Current Verison 0.86 - [Link](https://github.com/VincentWillats/PocketTarkov/releases/tag/0.86)
 
 
 ## Features
@@ -39,6 +39,8 @@ It pulls the tarkov window position and size from the windows API and does not i
 The market prices are pulled using https://tarkov-market.com/ API, so special thanks to Tarkov Market!
 
 ## Update Log
+- 29/08/2020 0.86
+  * Updated maps for 12.7.
 - 24/06/2020 0.85 
   * Security update.
 - 24/06/2020 0.80 

@@ -274,14 +274,16 @@ namespace PocketTarkov.Classes
             // 
             // MyForm
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.ClientSize = new System.Drawing.Size(284, 261);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MyForm";
+            this.Load += new System.EventHandler(this.MyForm_Load);
             this.ResumeLayout(false);
 
         }
 
+        private void MyForm_Load(object sender, EventArgs e)
+        {
 
+        }
     }
 }

@@ -1,4 +1,12 @@
 # PocketTarkov 
+
+## Update 02/01/2021
+This has become a little outdated and I may get around to updating it in the future, also the API key is/will go invalid.
+If you would like to clone/build it yourself you can get a key over at https://www.patreon.com/tarkov_market/posts
+
+
+
+
 Last Updated on 29/08/2020
 
  Overlay For Escape For Tarkov to provide easy access to game information.
